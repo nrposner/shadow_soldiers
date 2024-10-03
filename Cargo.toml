@@ -1,0 +1,9 @@
+[package]
+name = "shadow_soldiers_gui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+egui = "0.20"
+eframe = "0.20"
+rand = "0.8"
