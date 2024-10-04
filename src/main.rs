@@ -26,13 +26,17 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "Start".to_string(),
             Dialogue {
-                intro: "You are in the vestibule. A bellhop stands at attention.".to_string(),
+            speaker: "".to_string(),
+            intro: r"The front door swings shut, cutting off the bitter wind like a scythe.\
+                You stand in the harsh light of a public apartment vestibule.\ 
+                A grandfather clock stands stout against the wall, like an elderly servant \
+                whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
-                        description: "Talk to the bellhop.".to_string(),
+                        description: "Inspect the grandfather clock.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
-                        success_dialogue: Some("BellhopResponse".to_string()),
+                        success_dialogue: Some("InspectClock".to_string()),
                         failure_dialogue: None,
                     },
                     DialogueOption {
@@ -49,27 +53,568 @@ impl Default for DialogueApp {
 
         // Bellhop Dialogue
         vestibule_dialogues.insert(
-            "BellhopResponse".to_string(),
+            "InspectClock".to_string(),
             Dialogue {
-                intro: "The bellhop nods and smiles warmly. 'Welcome, sir,' he says.".to_string(),
+                speaker: "".to_string(),
+                intro: "A round, pale face crossed by dark lines stares down at you. It has seen much, and forgotten more.".to_string(),
                 options: vec![
                     DialogueOption {
-                        description: "Exit conversation.".to_string(), // This sends you back to Vestibule's "Start"
+                        description: "What stories could you tell me, old man? (Delusion 12)".to_string(), 
+                        challenge_attribute: Some("delusion".to_string()),
+                        challenge_number: Some(12),
+                        success_dialogue: Some("HungryClock".to_string()), 
+                        failure_dialogue: Some("MockingClock".to_string()),
+
+                        // hungry for the gear? it wants to eat its beating heart. Can give you a hint of where to find it
+                    },
+
+                    //to go back to the room's origin, the code is 'Start'
+
+                    DialogueOption {
+                        description: "Check the time.".to_string(), 
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("BrokenClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Open it up.".to_string(), 
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Goodbye, fair clock. (End conversation).".to_string(), 
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            },
+        );
+
+        vestibule_dialogues.insert(
+            "HungryClock".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()),
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "BrokenClock".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"Its two hands, the shorter ending in a stylized sun and the longer in a crescent moon, \
+                are stuck at 5 hours and 37 minutes".to_string(), // this is a CLUE
+                options: vec![
+                    DialogueOption {
+                        description: "What a waste. Surely I could fix it up?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockRecommends".to_string()), //gizmo to fix it, or telling you to open it up to do so
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockFutile".to_string()), //futilely ask if this is morning or night
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Stand proud, fallen soldier of the Republic! (Salute the clock)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockSalute".to_string()), //salute it
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Goodbye, mysterious clock.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), //exit
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+
+        // have a passive apparatchik check to know about fictional soviet-era clock and time policies
+
+        // this check to notice that it's missing a crucial gear, and what to look for elsewhere
+        // can be retried later if you happen to find the gear with a bonus, if you succeed here you can
+        //fix it automatically with the gear
+
+        vestibule_dialogues.insert(
+            "ClockInterior".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()),
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "MockingClock".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"It seems to talk to you. It says 'Why are you talking to a clock, you absolute dolt? You twat.\
+                Has my non-sentient existence come to the point that madmen come in off the street and try to engage me in conversation?'".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Okay, that's just, like, your opinion, man. (End conversation)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Tell me your secrets!".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockDecline".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockDecline".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "No.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Well, alright then.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Fuck you, and your little cuckoo too.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
                     },
                 ],
-                is_hidden: false,
-            },
+                is_hidden: true,
+            }
         );
+
+        vestibule_dialogues.insert(
+            "ClockRecommends".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"You'd have to get into this thing's guts. Are you mentally and *spiritually* prepared to mess around \
+                with this poor, fallen soldier's insides? On the off chance you can restore life to the dead?".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "On second thought, let's not do that.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("BrokenClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Come on, why did you have to phrase it that way?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockPhrasing".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Let's do this.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockPhrasing".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "Like what?".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Like I'm doing something creepy here! It's just a broken clock.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("JustABrokenClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Like this is some *religious* thing. That's not what I'm about.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ReligiousClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Like... you know.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockSuggestive".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "You know what, never mind.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("BrokenClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Fine, I'll get *into its guts*. What's in there?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "JustABrokenClock".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ReligiousClock".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockSuggestive".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "I'm very, *very* sure I don't.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Like it's something... sexual.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockSexual".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Fine, I'll leave off. What was that about a sun and moon again?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("BrokenClock".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockSexual".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"Wow. Just wow. Just what about sticking your hands *wrist deep* in your comrade's bloody, \
+                pulsating wound seems *sexual* to you?".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: r"It's not you, it's everyone. Come up with a theoretical justification for your \
+                        objectively weird thoughts. ".to_string(),
+                        challenge_attribute: Some("pathology".to_string()),
+                        challenge_number: Some(8),
+                        success_dialogue: Some("ClockPerversion".to_string()), //Pathology check to justify yourself
+                        failure_dialogue: Some("ClockTrauma".to_string()),
+                    },
+
+                    DialogueOption {
+                        description: "There it is again! You're putting this weird *emphasis* on things.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockEmphasis".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Actually, you know what? This isn't a sexual thing, it's a religious thing.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockSexualReligion".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockPerversion".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"It's an extremely common and not at all shameful perversion, characteristic of the Republic's \
+                struggles against the insidious American *Central Intelligence Agency*.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Let's go with that.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockCIA".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "No, you can't possibly be serious. How can that possibly make sense?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockExplanation".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockTrauma".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "It's a trauma response.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "What, seriously?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockNotTrauma".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "Did I have to do... that... during The War? Do I have repressed memories I need to process?".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockRepression".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockNotTrauma".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"Look, all I now is that whenever something like this happens to you, there's exactly one \
+                phrase bouncing around this empty skull, and it's 'trauma response'. Trauma response this, \
+                trauma response that. It gets you out of anything.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockRepression".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"Something here is definitely repressed, but it's not memories. You're no amnesiac, \
+                as much as you might like to be, at times.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockCIA".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()),
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockExplanation".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: r"Simple. Communism is built upon love for your comrade. \
+                Not bourgeous romantic love, or feudal familial love, or reactionary \
+                love of country, but the superior and pure love of the worker standing \
+                by your side. The CIA's modus operandi is to undermine the foundation \
+                of communism by turning comrades against one another. This objective, \
+                to our great misfortune, has been largely successful. Everywhere now, \
+                you can see signs of bourgeois romantic love displacing \
+                true communist camaraderie, and bringing with it a perverse focus on \
+                sex. But this train of thought, by re-associating the apparently \
+                sexual elements with the suffering of one's comrades, reinforces the \
+                revolutionary spirit and wards off capitalist infiltration. The only \
+                reason you recoil from this image, instead of embracing it, is \
+                because you yet possess a remnant of the bourgeois ego, nurtured by CIA \
+                propaganda, to which laying down all and destroying all boundaries \
+                for the sake of your comrades is unacceptable.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+
+        // default template
+
+        vestibule_dialogues.insert(
+            "".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        // vestibule_dialogues.insert(
+        //     "InspectClock".to_string(),
+        //     Dialogue {
+        //         intro: "A round, pale face crossed by dark lines stares down at you. ".to_string(),
+        //         options: vec![
+        //             DialogueOption {
+        //                 description: "Exit conversation.".to_string(), // This sends you back to Vestibule's "Start"
+        //                 challenge_attribute: None,
+        //                 challenge_number: None,
+        //                 success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+        //                 failure_dialogue: None,
+        //             },
+        //         ],
+        //         is_hidden: false,
+        //     },
+        // );
+
+
+
+
+        /////// bellhop dialogues above here
+        /// replace with a grandfather clock, secrets within
+
+
+
 
         // Define sample dialogues for the First Floor
         let mut first_floor_dialogues = HashMap::new();
         first_floor_dialogues.insert(
             "Start".to_string(),
             Dialogue {
+                speaker: "".to_string(),
                 intro: "You are now on the first floor. A butler greets you.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -80,8 +625,8 @@ impl Default for DialogueApp {
                         failure_dialogue: None,
                     },
                     DialogueOption {
-                        description: "Try to open the stuck door (Strength challenge).".to_string(),
-                        challenge_attribute: Some("strength".to_string()),
+                        description: "Try to open the stuck door (Dossier challenge).".to_string(),
+                        challenge_attribute: Some("dossier".to_string()),
                         challenge_number: Some(12),
                         success_dialogue: Some("Garden".to_string()),
                         failure_dialogue: Some("FailedDoor".to_string()),
@@ -102,6 +647,7 @@ impl Default for DialogueApp {
         first_floor_dialogues.insert(
             "ButlerResponse".to_string(),
             Dialogue {
+                speaker: "".to_string(),
                 intro: "The butler nods respectfully. 'The garden is beyond the stuck door,' he mentions.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -119,6 +665,7 @@ impl Default for DialogueApp {
         first_floor_dialogues.insert(
             "FailedDoor".to_string(),
             Dialogue {
+                speaker: "".to_string(),
                 intro: "The door remains stuck, refusing to budge.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -138,6 +685,7 @@ impl Default for DialogueApp {
         garden_dialogues.insert(
             "Start".to_string(),
             Dialogue {
+                speaker: "".to_string(),
                 intro: "You are now in the garden. An old woman sits on a bench.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -163,6 +711,7 @@ impl Default for DialogueApp {
         garden_dialogues.insert(
             "OldWomanResponse".to_string(),
             Dialogue {
+                speaker: "".to_string(),
                 intro: "The old woman smiles softly and speaks in a quiet voice.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -208,9 +757,26 @@ impl Default for DialogueApp {
         Self {
             current_text: "Welcome!".to_string(),
             player: Player {
-                strength: 10,
-                wisdom: 8,
-                knowledge: 7,
+                tech: 2,
+                arts: 4,
+                bur: 1, //short for bureaucracy
+                und: 2, //short for underworld
+                checkmate_mod: 0,
+                rocketry_mod: 0,
+                pathology_mod: 0,
+                civic_engineering_mod: 0,
+                apparatchik_mod: 0,
+                quota_mod: 0,
+                robot_mod: 0,
+                dossier_mod: 0,
+                delusion_mod: 0,
+                arts2_mod: 0,
+                arts3_mod: 0,
+                arts4_mod: 0,
+                high_proof_mod: 0,
+                prohibition_mod: 0,
+                gizmo_mod: 0,
+                oldtime_religion_mod: 0,
             },
             locations,
             current_location_id: "Vestibule".to_string(), // Start in the Vestibule
@@ -218,6 +784,20 @@ impl Default for DialogueApp {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -239,7 +819,7 @@ impl eframe::App for DialogueApp {
                             if option.challenge_number.is_some() {
                                 let success = handle_challenge(&self.player, option);
                                 if success {
-                                    // Strength challenge success - transition to Garden
+                                    // Dossier challenge success - transition to Garden
                                     if option.success_dialogue == Some("Garden".to_string()) {
                                         new_location_id = Some("Garden".to_string());
                                         new_dialogue_id = Some("Start".to_string());  // Set to the Garden's start dialogue
@@ -308,8 +888,22 @@ fn handle_challenge(player: &Player, option: &DialogueOption) -> bool {
     if let Some(challenge_attribute) = &option.challenge_attribute {
         if let Some(challenge_number) = option.challenge_number {
             let attribute_value = match challenge_attribute.as_str() {
-                "intelligence" => player.intelligence(),
-                "strength" => player.strength,
+                "checkmate" => player.checkmate(),
+                "rocketry" => player.rocketry(),
+                "pathology" => player.pathology(),
+                "civic engineering" => player.civic_engineering(),
+                "apparatchik" => player.apparatchik(),
+                "quota" => player.quota(),
+                "robot" => player.robot(),
+                "dossier" => player.dossier(),
+                "delusion" => player.delusion(),
+                "arts2" => player.arts2(),
+                "arts3" => player.arts3(),
+                "arts4" => player.arts4(),
+                "high proof" => player.high_proof(),
+                "prohibition" => player.prohibition(),
+                "gizmo" => player.gizmo(),
+                "oldtime religion" => player.oldtime_religion(),
                 _ => 0,
             };
 
@@ -345,14 +939,91 @@ fn roll_dice() -> (i32, i32) {
 }
 
 struct Player {
-    strength: i32,
-    wisdom: i32,
-    knowledge: i32,
+    tech: i32,
+    arts: i32,
+    bur: i32, //short for bureaucracy
+    und: i32, //short for underworld
+    checkmate_mod: i32,
+    rocketry_mod: i32,
+    pathology_mod: i32,
+    civic_engineering_mod: i32,
+    apparatchik_mod: i32,
+    quota_mod: i32,
+    robot_mod: i32,
+    dossier_mod: i32,
+    delusion_mod: i32,
+    arts2_mod: i32,
+    arts3_mod: i32,
+    arts4_mod: i32,
+    high_proof_mod: i32,
+    prohibition_mod: i32,
+    gizmo_mod: i32,
+    oldtime_religion_mod: i32
 }
 
 impl Player {
-    fn intelligence(&self) -> i32 {
-        self.wisdom + self.knowledge
+    fn checkmate(&self) -> i32 {
+        self.tech + self.checkmate_mod
+    }
+
+    fn rocketry(&self) -> i32 {
+        self.tech + self.rocketry_mod
+    }
+
+    fn pathology(&self) -> i32 {
+        self.tech + self.pathology_mod
+    }
+
+    fn civic_engineering(&self) -> i32 {
+        self.tech + self.civic_engineering_mod
+    }
+
+    fn apparatchik(&self) -> i32 {
+        self.bur + self.apparatchik_mod
+    }
+
+    fn quota(&self) -> i32 {
+        self.bur + self.quota_mod
+    }
+
+    fn robot(&self) -> i32 {
+        self.bur + self.robot_mod
+    }
+
+    fn dossier(&self) -> i32 {
+        self.bur + self.dossier_mod
+    }
+
+    fn delusion(&self) -> i32 {
+        self.arts + self.delusion_mod
+    }
+
+    fn arts2(&self) -> i32 {
+        self.arts + self.arts2_mod
+    }
+
+    fn arts3(&self) -> i32 {
+        self.arts + self.arts3_mod
+    }
+
+    fn arts4(&self) -> i32 {
+        self.arts + self.arts4_mod
+    }
+
+    fn high_proof(&self) -> i32 {
+        self.und + self.high_proof_mod
+    }
+
+    fn prohibition(&self) -> i32 {
+        self.und + self.prohibition_mod
+    }
+
+    fn gizmo(&self) -> i32 {
+        self.und + self.gizmo_mod
+    }
+
+    fn oldtime_religion(&self) -> i32 {
+        self.und + self.oldtime_religion_mod
     }
 }
 
@@ -367,6 +1038,7 @@ struct DialogueOption {
 
 #[derive(Clone)]
 struct Dialogue {
+    speaker: String,
     intro: String,
     options: Vec<DialogueOption>,
     is_hidden: bool,
@@ -381,8 +1053,6 @@ fn main() {
         Box::new(|_cc| Box::new(app)),  // Closure to create the app
     );
 }
-
-
 
 
 
