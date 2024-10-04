@@ -51,11 +51,10 @@ impl Default for DialogueApp {
             },
         );
 
-        // Bellhop Dialogue
         vestibule_dialogues.insert(
             "InspectClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "A round, pale face crossed by dark lines stares down at you. It has seen much, and forgotten more.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -101,7 +100,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "HungryClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "".to_string(),
                 options: vec![
                     DialogueOption {
@@ -119,7 +118,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "BrokenClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"Its two hands, the shorter ending in a stylized sun and the longer in a crescent moon, \
                 are stuck at 5 hours and 37 minutes".to_string(), // this is a CLUE
                 options: vec![
@@ -132,7 +131,7 @@ impl Default for DialogueApp {
                     },
 
                     DialogueOption {
-                        description: "".to_string(),
+                        description: "Five-thirty-seven in the morning or night?".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("ClockFutile".to_string()), //futilely ask if this is morning or night
@@ -169,7 +168,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockInterior".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "".to_string(),
                 options: vec![
                     DialogueOption {
@@ -187,7 +186,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "MockingClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"It seems to talk to you. It says 'Why are you talking to a clock, you absolute dolt? You twat.\
                 Has my non-sentient existence come to the point that madmen come in off the street and try to engage me in conversation?'".to_string(),
                 options: vec![
@@ -214,7 +213,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockDecline".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "No.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -240,7 +239,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockRecommends".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"You'd have to get into this thing's guts. Are you mentally and *spiritually* prepared to mess around \
                 with this poor, fallen soldier's insides? On the off chance you can restore life to the dead?".to_string(),
                 options: vec![
@@ -275,7 +274,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockPhrasing".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "Like what?".to_string(),
                 options: vec![
                     DialogueOption {
@@ -325,7 +324,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "JustABrokenClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "".to_string(),
                 options: vec![
                     DialogueOption {
@@ -343,7 +342,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ReligiousClock".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "".to_string(),
                 options: vec![
                     DialogueOption {
@@ -361,7 +360,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockSuggestive".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "I'm very, *very* sure I don't.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -387,7 +386,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockSexual".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"Wow. Just wow. Just what about sticking your hands *wrist deep* in your comrade's bloody, \
                 pulsating wound seems *sexual* to you?".to_string(),
                 options: vec![
@@ -423,7 +422,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockPerversion".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"It's an extremely common and not at all shameful perversion, characteristic of the Republic's \
                 struggles against the insidious American *Central Intelligence Agency*.".to_string(),
                 options: vec![
@@ -450,7 +449,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockTrauma".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "It's a trauma response.".to_string(),
                 options: vec![
                     DialogueOption {
@@ -476,7 +475,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockNotTrauma".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"Look, all I now is that whenever something like this happens to you, there's exactly one \
                 phrase bouncing around this empty skull, and it's 'trauma response'. Trauma response this, \
                 trauma response that. It gets you out of anything.".to_string(),
@@ -496,7 +495,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockRepression".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"Something here is definitely repressed, but it's not memories. You're no amnesiac, \
                 as much as you might like to be, at times.".to_string(),
                 options: vec![
@@ -515,7 +514,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockCIA".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: "".to_string(),
                 options: vec![
                     DialogueOption {
@@ -533,7 +532,7 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "ClockExplanation".to_string(),
             Dialogue {
-                speaker: "".to_string(),
+                speaker: "Grandfather Clock".to_string(),
                 intro: r"Simple. Communism is built upon love for your comrade. \
                 Not bourgeous romantic love, or feudal familial love, or reactionary \
                 love of country, but the superior and pure love of the worker standing \
@@ -809,6 +808,11 @@ impl eframe::App for DialogueApp {
 
             if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                 if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+
+                    // Display the speaker's name before the dialogue
+                    ui.heading(&format!("{} ", current_dialogue.speaker));  // Display the speaker's name
+
+                    // Display the dialogue
                     ui.heading(&current_dialogue.intro);
 
                     let mut new_dialogue_id = None;
@@ -1053,6 +1057,8 @@ fn main() {
         Box::new(|_cc| Box::new(app)),  // Closure to create the app
     );
 }
+
+
 
 
 
@@ -2231,28 +2237,28 @@ fn main() {
 
 //         Self {
 //             current_text: "Welcome!".to_string(),
-//             player: Player {
-//                 tech: 2,
-//                 arts: 4,
-//                 bur: 1, //short for bureaucracy
-//                 und: 2, //short for underworld
-//                 checkmate_mod: 0,
-//                 rocketry_mod: 0,
-//                 pathology_mod: 0,
-//                 civic_engineering_mod: 0,
-//                 apparatchik_mod: 0,
-//                 quota_mod: 0,
-//                 robot_mod: 0,
-//                 dossier_mod: 0,
-//                 arts1_mod: 0,
-//                 arts2_mod: 0,
-//                 arts3_mod: 0,
-//                 arts4_mod: 0,
-//                 high_proof_mod: 0,
-//                 prohibition_mod: 0,
-//                 gizmo_mod: 0,
-//                 oldtime_religion_mod: 0,
-//             },
+            // player: Player {
+            //     tech: 2,
+            //     arts: 4,
+            //     bur: 1, //short for bureaucracy
+            //     und: 2, //short for underworld
+            //     checkmate_mod: 0,
+            //     rocketry_mod: 0,
+            //     pathology_mod: 0,
+            //     civic_engineering_mod: 0,
+            //     apparatchik_mod: 0,
+            //     quota_mod: 0,
+            //     robot_mod: 0,
+            //     dossier_mod: 0,
+            //     arts1_mod: 0,
+            //     arts2_mod: 0,
+            //     arts3_mod: 0,
+            //     arts4_mod: 0,
+            //     high_proof_mod: 0,
+            //     prohibition_mod: 0,
+            //     gizmo_mod: 0,
+            //     oldtime_religion_mod: 0,
+            // },
 //             dialogues,
 //             current_dialogue_id: "Start".to_string(),
 //         }
@@ -2287,26 +2293,26 @@ fn main() {
 // fn handle_challenge(player: &Player, option: &DialogueOption) -> bool {
 //     if let Some(challenge_attribute) = &option.challenge_attribute {
 //         if let Some(challenge_number) = option.challenge_number {
-//             let attribute_value = match challenge_attribute.as_str() {
+            // let attribute_value = match challenge_attribute.as_str() {
 
-//                 "checkmate" => player.checkmate(),
-//                 "rocketry" => player.rocketry(),
-//                 "pathology" => player.pathology(),
-//                 "civic engineering" => player.civic_engineering(),
-//                 "apparatchik" => player.apparatchik(),
-//                 "quota" => player.quota(),
-//                 "robot" => player.robot(),
-//                 "dossier" => player.dossier(),
-//                 "arts1" => player.arts1(),
-//                 "arts2" => player.arts2(),
-//                 "arts3" => player.arts3(),
-//                 "arts4" => player.arts4(),
-//                 "high proof" => player.high_proof(),
-//                 "prohibition" => player.prohibition(),
-//                 "gizmo" => player.gizmo(),
-//                 "oldtime religion" => player.oldtime_religion(),
-//                 _ => 0,
-//             };
+            //     "checkmate" => player.checkmate(),
+            //     "rocketry" => player.rocketry(),
+            //     "pathology" => player.pathology(),
+            //     "civic engineering" => player.civic_engineering(),
+            //     "apparatchik" => player.apparatchik(),
+            //     "quota" => player.quota(),
+            //     "robot" => player.robot(),
+            //     "dossier" => player.dossier(),
+            //     "arts1" => player.arts1(),
+            //     "arts2" => player.arts2(),
+            //     "arts3" => player.arts3(),
+            //     "arts4" => player.arts4(),
+            //     "high proof" => player.high_proof(),
+            //     "prohibition" => player.prohibition(),
+            //     "gizmo" => player.gizmo(),
+            //     "oldtime religion" => player.oldtime_religion(),
+            //     _ => 0,
+            // };
 
 //             let (die1, die2) = roll_dice();
 //             let roll_sum = die1 + die2;
