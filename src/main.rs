@@ -1134,11 +1134,23 @@ impl DialogueApp {
 
     fn get_player_skill(&self, skill: &str) -> i32 {
         match skill {
-            "tech" => self.player.tech,
-            "arts" => self.player.arts,
-            "bureaucracy" => self.player.bur,
-            "underworld" => self.player.und,
-            _ => 0,  // Default to 0 if the skill doesn't exist
+            "checkmate" => self.player.checkmate(),
+            "rocketry" => self.player.rocketry(),
+            "pathology" => self.player.pathology(),
+            "civic engineering" => self.player.civic_engineering(),
+            "apparatchik" => self.player.apparatchik(),
+            "quota" => self.player.quota(),
+            "robot" => self.player.robot(),
+            "dossier" => self.player.dossier(),
+            "delusion" => self.player.delusion(),
+            "arts2" => self.player.arts2(),
+            "arts3" => self.player.arts3(),
+            "arts4" => self.player.arts4(),
+            "high proof" => self.player.high_proof(),
+            "prohibition" => self.player.prohibition(),
+            "gizmo" => self.player.gizmo(),
+            "oldtime religion" => self.player.oldtime_religion(),
+            _ => 0, // Default to 0 if the skill doesn't exist
         }
     }
 }
