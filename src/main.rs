@@ -1174,6 +1174,7 @@ impl Player {
 enum GameState {
     CharacterCreation,
     InGame,
+    InventoryView,
 }
 
 #[derive(Clone)]
