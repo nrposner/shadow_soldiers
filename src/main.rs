@@ -996,6 +996,28 @@ impl DialogueApp {
             }
         }
     }
+
+    fn display_current_dialogue(&mut self, ui: &mut egui::Ui) {
+        if let Some(current_dialogue_id) = &self.current_dialogue_id {
+            if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+                ui.heading(&format!("{} says:", current_dialogue.speaker));
+                ui.heading(&current_dialogue.intro);
+
+                let mut new_dialogue_id = None;
+                for option in current_dialogue.options.iter() {
+                    if ui.button(&option.description).clicked() {
+                        new_dialogue_id = option.success_dialogue.clone();
+                    }
+                }
+
+                if let Some(new_id) = new_dialogue_id {
+                    self.current_dialogue_id = Some(new_id);
+                }
+            }
+        } else {
+            ui.label("No dialogue available.");
+        }
+    }
 }
 
 // Challenge logic
