@@ -17,6 +17,10 @@ struct DialogueApp {
     current_dialogue_id: Option<String>,  // Current dialogue ID, or None if not in a dialogue
 }
 
+struct PassiveDialogue{
+
+}
+
 impl Default for DialogueApp {
     fn default() -> Self {
         let mut locations = HashMap::new();
@@ -27,10 +31,7 @@ impl Default for DialogueApp {
             "Start".to_string(),
             Dialogue {
             speaker: "".to_string(),
-            intro: r"The front door swings shut, cutting off the bitter wind like a scythe.\
-                You stand in the harsh light of a public apartment vestibule.\ 
-                A grandfather clock stands stout against the wall, like an elderly servant \
-                whose crooked back can't quite stand up to attention.".to_string(),
+            intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Inspect the grandfather clock.".to_string(),
@@ -78,14 +79,6 @@ impl Default for DialogueApp {
                     },
 
                     DialogueOption {
-                        description: "Open it up.".to_string(), 
-                        challenge_attribute: None,
-                        challenge_number: None,
-                        success_dialogue: Some("ClockInterior".to_string()), 
-                        failure_dialogue: None,
-                    },
-
-                    DialogueOption {
                         description: "Goodbye, fair clock. (End conversation).".to_string(), 
                         challenge_attribute: None,
                         challenge_number: None,
@@ -119,8 +112,7 @@ impl Default for DialogueApp {
             "BrokenClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"Its two hands, the shorter ending in a stylized sun and the longer in a crescent moon, \
-                are stuck at 5 hours and 37 minutes".to_string(), // this is a CLUE
+                intro: r"Its two hands, the shorter ending in a stylized sun and the longer in a crescent moon, are stuck at 5 hours and 37 minutes".to_string(), // this is a CLUE
                 options: vec![
                     DialogueOption {
                         description: "What a waste. Surely I could fix it up?".to_string(),
@@ -169,8 +161,26 @@ impl Default for DialogueApp {
             "ClockInterior".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: "".to_string(),
+                intro: "The oak casing is stiff, the hinges squeaky from disuse. It takes a solid heave with both hands to pull it out, 
+                and the cover nearly comes off in your grasp. Inside, you see a forest of gears, exposed to the eye and glimmering 
+                under a thin coat of dust. On the bottom, resting against the casing, lies a tin model airplane.".to_string(),
                 options: vec![
+                    DialogueOption {
+                        description: "What kind of plane is it? (Rocketry 6)".to_string(),
+                        challenge_attribute: Some("rocketry".to_string()),
+                        challenge_number: Some(6),
+                        success_dialogue: Some("ClockPlane".to_string()),
+                        failure_dialogue: Some("ClockPlaneFail".to_string()),
+                    },
+
+                    DialogueOption {
+                        description: "Let's fix you up, soldier.".to_string(),
+                        challenge_attribute: Some("gizmo".to_string()),
+                        challenge_number: Some(12),
+                        success_dialogue: Some("ClockMissingGear".to_string()),
+                        failure_dialogue: Some("ClockFixImpossible".to_string()),
+                    },
+
                     DialogueOption {
                         description: "".to_string(),
                         challenge_attribute: None,
@@ -187,8 +197,7 @@ impl Default for DialogueApp {
             "MockingClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"It seems to talk to you. It says 'Why are you talking to a clock, you absolute dolt? You twat.\
-                Has my non-sentient existence come to the point that madmen come in off the street and try to engage me in conversation?'".to_string(),
+                intro: r"It seems to talk to you. It says 'Why are you talking to a clock, you absolute dolt? You twat. Has my non-sentient existence come to the point that madmen come in off the street and try to engage me in conversation?'".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Okay, that's just, like, your opinion, man. (End conversation)".to_string(),
@@ -240,8 +249,7 @@ impl Default for DialogueApp {
             "ClockRecommends".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"You'd have to get into this thing's guts. Are you mentally and *spiritually* prepared to mess around \
-                with this poor, fallen soldier's insides? On the off chance you can restore life to the dead?".to_string(),
+                intro: r"You'd have to get into this thing's guts. Are you mentally and *spiritually* prepared to mess around with this poor, fallen soldier's insides? On the off chance you can restore life to the dead?".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "On second thought, let's not do that.".to_string(),
@@ -387,12 +395,10 @@ impl Default for DialogueApp {
             "ClockSexual".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"Wow. Just wow. Just what about sticking your hands *wrist deep* in your comrade's bloody, \
-                pulsating wound seems *sexual* to you?".to_string(),
+                intro: r"Wow. Just wow. Just what about sticking your hands *wrist deep* in your comrade's bloody, pulsating wound seems *sexual* to you?".to_string(),
                 options: vec![
                     DialogueOption {
-                        description: r"It's not you, it's everyone. Come up with a theoretical justification for your \
-                        objectively weird thoughts. ".to_string(),
+                        description: r"It's not you, it's everyone. Come up with a theoretical justification for your objectively weird thoughts. ".to_string(),
                         challenge_attribute: Some("pathology".to_string()),
                         challenge_number: Some(8),
                         success_dialogue: Some("ClockPerversion".to_string()), //Pathology check to justify yourself
@@ -423,8 +429,7 @@ impl Default for DialogueApp {
             "ClockPerversion".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"It's an extremely common and not at all shameful perversion, characteristic of the Republic's \
-                struggles against the insidious American *Central Intelligence Agency*.".to_string(),
+                intro: r"It's an extremely common and not at all shameful perversion, characteristic of the Republic's struggles against the insidious American *Central Intelligence Agency*.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Let's go with that.".to_string(),
@@ -476,9 +481,7 @@ impl Default for DialogueApp {
             "ClockNotTrauma".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"Look, all I now is that whenever something like this happens to you, there's exactly one \
-                phrase bouncing around this empty skull, and it's 'trauma response'. Trauma response this, \
-                trauma response that. It gets you out of anything.".to_string(),
+                intro: r"Look, all I now is that whenever something like this happens to you, there's exactly one phrase bouncing around this empty skull, and it's 'trauma response'. Trauma response this, trauma response that. It gets you out of anything.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "".to_string(),
@@ -496,8 +499,7 @@ impl Default for DialogueApp {
             "ClockRepression".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: r"Something here is definitely repressed, but it's not memories. You're no amnesiac, \
-                as much as you might like to be, at times.".to_string(),
+                intro: r"Something here is definitely repressed, but it's not memories. You're no amnesiac, as much as you might like to be, at times.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "".to_string(),
@@ -550,10 +552,62 @@ impl Default for DialogueApp {
                 for the sake of your comrades is unacceptable.".to_string(),
                 options: vec![
                     DialogueOption {
+                        description: "You know, somehow that fails to make me okay with all of this.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
                         description: "".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("".to_string()), 
+                        failure_dialogue: None,
+                    },
+
+                    DialogueOption {
+                        description: "If this is what communism has come to, shave my mustache and call me Milton Friedman. (Leave in disgust)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), 
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockMissingGear".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockFixImpossible".to_string(),
+            Dialogue {
+                speaker: "".to_string(),
+                intro: "".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
                     },
                 ],
@@ -603,7 +657,7 @@ impl Default for DialogueApp {
 
 
         /////// bellhop dialogues above here
-        /// replace with a grandfather clock, secrets within
+        // replace with a grandfather clock, secrets within
 
 
 
@@ -784,26 +838,11 @@ impl Default for DialogueApp {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Implement eframe::App
 impl eframe::App for DialogueApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
+            ui.heading("In-Game Dialogue");
             let current_dialogue_id_clone = self.current_dialogue_id.clone();
 
             if let Some(current_dialogue_id) = &current_dialogue_id_clone {
@@ -817,6 +856,26 @@ impl eframe::App for DialogueApp {
 
                     let mut new_dialogue_id = None;
                     let mut new_location_id = None;
+
+
+                    // place passive dialogue here??
+
+                    // if let Some(current_dialogue_passives) = current_dialogue.passives{
+
+
+                    //     //use handle_passive,
+                    //     //is the passive a vector of tuples, each containing a string for the 
+                    //     //skill, an i32 number, and a string for the result on a success?
+                    //     //also may be a result on failure. Maybe there's a dialogue on 
+                    //     //failure and not on success! 
+                    // };
+
+                    //store as a vector in Dialogue object??
+
+                    
+                    ///////
+
+
 
                     for option in current_dialogue.options.iter() {
                         if ui.button(&option.description).clicked() {
@@ -942,6 +1001,42 @@ fn roll_dice() -> (i32, i32) {
     (rng.gen_range(1..=6), rng.gen_range(1..=6))
 }
 
+
+fn handle_passive(player: &Player, option: &DialogueOption) -> bool {
+    if let Some(challenge_attribute) = &option.challenge_attribute {
+        if let Some(challenge_number) = option.challenge_number {
+            let attribute_value = match challenge_attribute.as_str() {
+                "checkmate" => player.checkmate(),
+                "rocketry" => player.rocketry(),
+                "pathology" => player.pathology(),
+                "civic engineering" => player.civic_engineering(),
+                "apparatchik" => player.apparatchik(),
+                "quota" => player.quota(),
+                "robot" => player.robot(),
+                "dossier" => player.dossier(),
+                "delusion" => player.delusion(),
+                "arts2" => player.arts2(),
+                "arts3" => player.arts3(),
+                "arts4" => player.arts4(),
+                "high proof" => player.high_proof(),
+                "prohibition" => player.prohibition(),
+                "gizmo" => player.gizmo(),
+                "oldtime religion" => player.oldtime_religion(),
+                _ => 0,
+            };
+
+            let total = 6 + attribute_value;
+            if total >= challenge_number {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    false
+}
+
+
 struct Player {
     tech: i32,
     arts: i32,
@@ -1029,7 +1124,28 @@ impl Player {
     fn oldtime_religion(&self) -> i32 {
         self.und + self.oldtime_religion_mod
     }
+
+    fn total_points(&self) -> i32 {
+        self.tech + self.arts + self.bur + self.und
+    }
+
+    fn remaining_points(&self) -> i32 {
+        12 - self.total_points()
+    }
+
+    fn is_valid(&self) -> bool {
+        self.tech >= 1 && self.arts >= 1 && self.bur >= 1 && self.und >= 1
+            && self.tech <= 6 && self.arts <= 6 && self.bur <= 6 && self.und <= 6
+            && self.total_points() == 12
+    }
 }
+
+enum GameState {
+    CharacterCreation,
+    InGame,
+}
+
+
 
 #[derive(Clone)]
 struct DialogueOption {
@@ -1040,6 +1156,18 @@ struct DialogueOption {
     failure_dialogue: Option<String>,
 }
 
+impl Default for DialogueOption {
+    fn default() -> Self {
+        DialogueOption {
+            description: "Continue".to_string(),
+            challenge_attribute: None,
+            challenge_number: None,
+            success_dialogue: Some("Start".to_string()),
+            failure_dialogue: None,
+        }
+    }
+}
+
 #[derive(Clone)]
 struct Dialogue {
     speaker: String,
@@ -1047,6 +1175,31 @@ struct Dialogue {
     options: Vec<DialogueOption>,
     is_hidden: bool,
 }
+
+impl Default for Dialogue {
+    fn default() -> Self {
+        Dialogue {
+            speaker: "Error".to_string(),
+            intro: "No dialogue available.".to_string(),
+            options: vec![
+                DialogueOption::default(),
+            ],
+            is_hidden: true,
+        }
+    }
+}
+
+//not clea this needs to be a separate Dialogue type, since we also want it to live in the regular hashmap
+
+// #[derive(Clone)]
+// struct PassiveDialogue{
+//     skill: String,
+//     passive_number: i32,
+//     dialogue: Dialogue,
+// }
+
+//set defaults friendly to passive dialogue for regular dialogue
+
 
 fn main() {
     let app = DialogueApp::default();
