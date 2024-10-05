@@ -1138,6 +1138,20 @@ impl Player {
             && self.tech <= 6 && self.arts <= 6 && self.bur <= 6 && self.und <= 6
             && self.total_points() == 12
     }
+
+    fn total_points(&self) -> i32 {
+        self.tech + self.arts + self.bur + self.und
+    }
+
+    fn remaining_points(&self) -> i32 {
+        12 - self.total_points()
+    }
+
+    fn is_valid(&self) -> bool {
+        self.tech >= 1 && self.arts >= 1 && self.bur >= 1 && self.und >= 1
+            && self.tech <= 6 && self.arts <= 6 && self.bur <= 6 && self.und <= 6
+            && self.total_points() == 12
+    }
 }
 
 enum GameState {
