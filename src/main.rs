@@ -1014,12 +1014,12 @@ impl eframe::App for DialogueApp {
 
                                 if success {
                                     if let Some(success_text) = &passive_check.success_text {
-                                        ui.heading(&format!("{} says:", passive_check.success_speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
                                         ui.label(success_text);
                                     }
                                 } else {
                                     if let Some(failure_text) = &passive_check.failure_text {
-                                        ui.heading(&format!("{} says:", passive_check.failure_speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
                                         ui.label(failure_text);
                                     }
                                 }
