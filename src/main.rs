@@ -1,6 +1,7 @@
 use eframe::{egui, Frame};
 use rand::Rng;
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 // Define Location structure
 struct Location {
@@ -1358,6 +1359,17 @@ impl Player {
         self.tech >= 1 && self.arts >= 1 && self.bur >= 1 && self.und >= 1
             && self.tech <= 6 && self.arts <= 6 && self.bur <= 6 && self.und <= 6
             && self.total_points() == 12
+    }
+
+    fn add_xp(&mut self, amount: i32) {
+        self.xp += amount;
+
+        // Handle leveling up
+        while self.xp >= 100 {
+            self.xp -= 100; // Reset XP and preserve the overflow
+            self.skill_points += 1; // Award skill points
+            println!("You gained a skill point! You now have {} skill points.", self.skill_points);
+        }
     }
 }
 
