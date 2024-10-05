@@ -19,10 +19,6 @@ struct DialogueApp {
     previous_dialogue_id: Option<String>,
 }
 
-struct PassiveDialogue{
-
-}
-
 impl Default for DialogueApp {
     fn default() -> Self {
         let mut locations = HashMap::new();
@@ -32,8 +28,8 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "Start".to_string(),
             Dialogue {
-            speaker: "".to_string(),
-            intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
+                speaker: "".to_string(),
+                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Inspect the grandfather clock.".to_string(),
@@ -52,6 +48,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -93,6 +90,23 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![
+                    PassiveCheck {
+                        skill: "robot".to_string(),
+                        target: 10,
+                        success_text: Some("You know its kind. The unrelenting metronome to which you dance.".to_string()),
+                        failure_text: None,
+                        speaker: Some("Robot".to_string())
+                    },
+                    PassiveCheck {
+                        skill: "gizmo".to_string(),
+                        target: 12,
+                        success_text: Some("It's in bad shape, boss. The varnish is falling off, the face needs a solid wipe down, 
+                        and I don't see a notice of last maintenance *anywhere*.".to_string()),
+                        failure_text: None,
+                        speaker: Some("Gizmo".to_string())
+                    },
+                ],
                 is_hidden: true,
             },
         );
@@ -112,6 +126,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -158,6 +173,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -204,6 +220,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -232,6 +249,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -260,6 +278,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -297,6 +316,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -352,6 +372,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -380,6 +401,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -399,6 +421,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
@@ -427,6 +450,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -464,6 +488,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -492,6 +517,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -520,6 +546,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -539,6 +566,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -558,6 +586,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -577,6 +606,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -628,6 +658,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -647,6 +678,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -666,6 +698,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -693,6 +726,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -723,6 +757,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -745,6 +780,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -783,6 +819,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -803,6 +840,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -822,6 +860,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -851,6 +890,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -871,6 +911,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -979,6 +1020,26 @@ impl eframe::App for DialogueApp {
             
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+
+
+                            // Handle multiple passive checks if they exist
+                            for passive_check in &current_dialogue.passive_check {
+                                // Perform the skill check
+                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
+                                let success = player_skill_value >= passive_check.target;
+
+                                if success {
+                                    if let Some(success_text) = &passive_check.success_text {
+                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.label(success_text);
+                                    }
+                                } else {
+                                    if let Some(failure_text) = &passive_check.failure_text {
+                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.label(failure_text);
+                                    }
+                                }
+                            }
             
                             // Display the speaker's name before the dialogue
                             ui.heading(&format!("{} ", current_dialogue.speaker));
@@ -1115,6 +1176,28 @@ impl DialogueApp {
             ui.label("No dialogue available.");
         }
     }
+
+    fn get_player_skill(&self, skill: &str) -> i32 {
+        match skill {
+            "checkmate" => self.player.checkmate(),
+            "rocketry" => self.player.rocketry(),
+            "pathology" => self.player.pathology(),
+            "civic engineering" => self.player.civic_engineering(),
+            "apparatchik" => self.player.apparatchik(),
+            "quota" => self.player.quota(),
+            "robot" => self.player.robot(),
+            "dossier" => self.player.dossier(),
+            "delusion" => self.player.delusion(),
+            "arts2" => self.player.arts2(),
+            "arts3" => self.player.arts3(),
+            "arts4" => self.player.arts4(),
+            "high proof" => self.player.high_proof(),
+            "prohibition" => self.player.prohibition(),
+            "gizmo" => self.player.gizmo(),
+            "oldtime religion" => self.player.oldtime_religion(),
+            _ => 0, // Default to 0 if the skill doesn't exist
+        }
+    }
 }
 
 // Challenge logic
@@ -1170,41 +1253,6 @@ fn handle_challenge(player: &Player, option: &DialogueOption) -> bool {
 fn roll_dice() -> (i32, i32) {
     let mut rng = rand::thread_rng();
     (rng.gen_range(1..=6), rng.gen_range(1..=6))
-}
-
-
-fn handle_passive(player: &Player, option: &DialogueOption) -> bool {
-    if let Some(challenge_attribute) = &option.challenge_attribute {
-        if let Some(challenge_number) = option.challenge_number {
-            let attribute_value = match challenge_attribute.as_str() {
-                "checkmate" => player.checkmate(),
-                "rocketry" => player.rocketry(),
-                "pathology" => player.pathology(),
-                "civic engineering" => player.civic_engineering(),
-                "apparatchik" => player.apparatchik(),
-                "quota" => player.quota(),
-                "robot" => player.robot(),
-                "dossier" => player.dossier(),
-                "delusion" => player.delusion(),
-                "arts2" => player.arts2(),
-                "arts3" => player.arts3(),
-                "arts4" => player.arts4(),
-                "high proof" => player.high_proof(),
-                "prohibition" => player.prohibition(),
-                "gizmo" => player.gizmo(),
-                "oldtime religion" => player.oldtime_religion(),
-                _ => 0,
-            };
-
-            let total = 6 + attribute_value;
-            if total >= challenge_number {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    false
 }
 
 
@@ -1346,7 +1394,17 @@ struct Dialogue {
     speaker: String,
     intro: String,
     options: Vec<DialogueOption>,
+    passive_check: Vec<PassiveCheck>, // New field for passive dialogue checks
     is_hidden: bool,
+}
+
+#[derive(Clone)]
+struct PassiveCheck {
+    skill: String,          // The player's skill to check
+    target: i32,            // The number to check against
+    success_text: Option<String>, // Text to display on success (Optional)
+    failure_text: Option<String>, // Text to display on failure (Optional)
+    speaker: Option<String>, // The speaker, who will be the same in both success and failure cases
 }
 
 impl Default for Dialogue {
@@ -1357,21 +1415,11 @@ impl Default for Dialogue {
             options: vec![
                 DialogueOption::default(),
             ],
+            passive_check: vec![],
             is_hidden: true,
         }
     }
 }
-
-//not clea this needs to be a separate Dialogue type, since we also want it to live in the regular hashmap
-
-// #[derive(Clone)]
-// struct PassiveDialogue{
-//     skill: String,
-//     passive_number: i32,
-//     dialogue: Dialogue,
-// }
-
-//set defaults friendly to passive dialogue for regular dialogue
 
 
 fn main() {
