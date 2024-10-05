@@ -1006,20 +1006,20 @@ impl eframe::App for DialogueApp {
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
 
 
-                            // Handle the passive check if it exists
-                            if let Some(passive_check) = &current_dialogue.passive_check {
+                            // Handle multiple passive checks if they exist
+                            for passive_check in &current_dialogue.passive_checks {
                                 // Perform the skill check
-                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
+                                let player_skill_value = self.get_player_skill(&passive_check.skill);
                                 let success = player_skill_value >= passive_check.target;
-                                
+
                                 if success {
                                     if let Some(success_text) = &passive_check.success_text {
-                                        ui.heading(&format!("{} ", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.heading(&format!("{} says:", passive_check.success_speaker.clone().unwrap_or("Narrator".to_string())));
                                         ui.label(success_text);
                                     }
                                 } else {
                                     if let Some(failure_text) = &passive_check.failure_text {
-                                        ui.heading(&format!("{} ", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.heading(&format!("{} says:", passive_check.failure_speaker.clone().unwrap_or("Narrator".to_string())));
                                         ui.label(failure_text);
                                     }
                                 }
