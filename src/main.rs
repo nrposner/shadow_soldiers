@@ -968,6 +968,15 @@ impl DialogueApp {
     }
 }
 
+// displaying inventory
+//not yet really implemented, need to esablish a way for player to see it
+fn display_inventory(&self, ui: &mut egui::Ui) {
+    ui.heading("Inventory:");
+    for item in &self.player.items {
+        ui.label(item);
+    }
+}
+
 // Challenge logic
 fn handle_challenge(player: &Player, option: &DialogueOption) -> bool {
     if let Some(challenge_attribute) = &option.challenge_attribute {
