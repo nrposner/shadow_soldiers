@@ -50,6 +50,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -108,6 +109,7 @@ impl Default for DialogueApp {
                         speaker: Some("Gizmo".to_string())
                     },
                 ],
+                xp_reward: None,
                 is_hidden: true,
             },
         );
@@ -128,6 +130,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -175,6 +178,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -222,6 +226,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -251,6 +256,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -280,6 +286,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -318,6 +325,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -374,6 +382,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -403,6 +412,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -423,6 +433,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
@@ -452,6 +463,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -490,6 +502,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -519,6 +532,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -548,6 +562,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -568,6 +583,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -588,6 +604,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -608,6 +625,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -660,6 +678,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -680,6 +699,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -700,6 +720,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -728,6 +749,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -759,6 +781,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -782,6 +805,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -821,6 +845,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -842,6 +867,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -862,6 +888,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -892,6 +919,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -913,6 +941,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -948,10 +977,10 @@ impl Default for DialogueApp {
         Self {
             current_text: "Welcome!".to_string(),
             player: Player {
-                tech: 2,
-                arts: 4,
-                bur: 1, //short for bureaucracy
-                und: 2, //short for underworld
+                tech: 3,
+                arts: 3,
+                bur: 3, //short for bureaucracy
+                und: 3, //short for underworld
                 checkmate_mod: 0,
                 rocketry_mod: 0,
                 pathology_mod: 0,
@@ -969,6 +998,9 @@ impl Default for DialogueApp {
                 gizmo_mod: 0,
                 oldtime_religion_mod: 0,
                 items: vec![],
+                xp: 0,
+                skill_points: 0,
+                dialogues_entered: HashSet::new(),
             },
             locations,
             current_location_id: "Vestibule".to_string(), // Start in the Vestibule
@@ -1012,33 +1044,90 @@ impl eframe::App for DialogueApp {
                 // In-game logic here
                 egui::CentralPanel::default().show(ctx, |ui| {
                     ui.heading("In-Game Dialogue");
+                    
                     let current_dialogue_id_clone = self.current_dialogue_id.clone();
-            
                     let mut new_dialogue_id = None;
                     let mut new_location_id = None;
-                    let mut options_to_remove = vec![];
-                    let mut items_to_add = vec![]; // Store items to be added after the immutable borrow ends
-            
+                    let mut options_to_remove = vec![];    // Store which options to remove
+                    let mut items_to_add = vec![];         // Store items to add to inventory after borrow ends
+                    let mut xp_reward = None;              // Store XP reward for later processing
+                    let mut passive_checks = vec![];       // Store passive checks to process later
+                    
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
+                        // First, get the current dialogue immutably
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
-
-                            // Check if the player has already entered this dialogue
+                            
+                            // Extract the XP reward
+                            xp_reward = current_dialogue.xp_reward;
+                            
+                            // Extract passive checks for later use
+                            passive_checks = current_dialogue.passive_check.clone();
+                            
+                            // Display the speaker's name before the dialogue
+                            ui.heading(&format!("{} ", current_dialogue.speaker));
+                            
+                            // Display the dialogue
+                            ui.heading(&current_dialogue.intro);
+                            
+                            // Iterate through the dialogue options
+                            for (i, option) in current_dialogue.options.iter().enumerate() {
+                                if ui.button(&option.description).clicked() {
+                                    // Clone the item to be picked up to avoid immutable borrow conflicts
+                                    if let Some(item) = &option.item_to_pickup {
+                                        items_to_add.push(item.clone());  // Add the item for later processing
+                                        options_to_remove.push(i);        // Mark this option for removal
+                                    }
+            
+                                    // Handle challenges and dialogue transitions
+                                    if option.challenge_number.is_some() {
+                                        let success = handle_challenge(&self.player, option);
+                                        if success {
+                                            new_dialogue_id = option.success_dialogue.clone();
+                                        } else {
+                                            new_dialogue_id = option.failure_dialogue.clone();
+                                        }
+                                    } else if let Some(success_dialogue) = &option.success_dialogue {
+                                        // Handle transition to a new location or dialogue
+                                        if self.locations.contains_key(success_dialogue) {
+                                            new_location_id = Some(success_dialogue.clone());
+                                            new_dialogue_id = None;
+                                        } else {
+                                            new_dialogue_id = Some(success_dialogue.clone());
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Now that the immutable borrow of `current_dialogue` has ended, we can safely mutate `self.player`
+                            
+                            // Add items to inventory
+                            for item in items_to_add {
+                                self.player.items.push(item);
+                            }
+                            
+                            // Remove options that have been interacted with
+                            if !options_to_remove.is_empty() {
+                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
+                                for &index in options_to_remove.iter().rev() {
+                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
+                                }
+                            }
+                            
+                            // Award XP if this is the first time entering the dialogue
                             if !self.player.dialogues_entered.contains(current_dialogue_id) {
-                                // Award XP if the dialogue has an XP reward and this is the first time entering
-                                if let Some(xp_reward) = current_dialogue.xp_reward {
-                                    self.player.add_xp(xp_reward);
-                                    println!("You gained {} XP!", xp_reward);
+                                if let Some(xp_amount) = xp_reward {
+                                    self.player.add_xp(xp_amount);
+                                    println!("You gained {} XP!", xp_amount);
                                 }
                                 // Mark the dialogue as entered
                                 self.player.dialogues_entered.insert(current_dialogue_id.clone());
                             }
-
-                            // Handle multiple passive checks if they exist
-                            for passive_check in &current_dialogue.passive_check {
-                                // Perform the skill check
-                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
+            
+                            // Handle passive checks
+                            for passive_check in passive_checks {
+                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;  // Assume some modifier for skill checks
                                 let success = player_skill_value >= passive_check.target;
-
+                                
                                 if success {
                                     if let Some(success_text) = &passive_check.success_text {
                                         ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
@@ -1051,53 +1140,10 @@ impl eframe::App for DialogueApp {
                                     }
                                 }
                             }
-            
-                            // Display the speaker's name before the dialogue
-                            ui.heading(&format!("{} ", current_dialogue.speaker));
-            
-                            // Display the dialogue
-                            ui.heading(&current_dialogue.intro);
-            
-                            for (i, option) in current_dialogue.options.iter().enumerate() {
-                                if ui.button(&option.description).clicked() {
-                                    // Clone the item to be picked up to avoid immutable borrow conflicts
-                                    if let Some(item) = &option.item_to_pickup {
-                                        items_to_add.push(item.clone());  // Add item to be processed later
-                                        options_to_remove.push(i);        // Remove option after it's clicked
-                                    }
-            
-                                    if option.challenge_number.is_some() {
-                                        let success = handle_challenge(&self.player, option);
-                                        if success {
-                                            new_dialogue_id = option.success_dialogue.clone();
-                                        } else {
-                                            new_dialogue_id = option.failure_dialogue.clone();
-                                        }
-                                    } else if let Some(success_dialogue) = &option.success_dialogue {
-                                        if self.locations.contains_key(success_dialogue) {
-                                            new_location_id = Some(success_dialogue.clone());
-                                            new_dialogue_id = None;
-                                        } else {
-                                            new_dialogue_id = Some(success_dialogue.clone());
-                                        }
-                                    }
-                                }
-                            }
-            
-                            // Now that we are outside the immutable borrow of `current_dialogue`, we can safely mutate `self.player.items`
-                            for item in items_to_add {
-                                self.player.items.push(item);
-                            }
-            
-                            if !options_to_remove.is_empty() {
-                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
-                                for &index in options_to_remove.iter().rev() {
-                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
-                                }
-                            }
                         }
                     }
             
+                    // Handle dialogue or location transition
                     if let Some(new_id) = new_dialogue_id {
                         self.current_dialogue_id = Some(new_id);
                     }
@@ -1112,6 +1158,7 @@ impl eframe::App for DialogueApp {
                     }
                 });
             }
+            
             
             
 
@@ -1290,6 +1337,7 @@ struct Player {
     items: Vec<String>,
     xp: i32,
     skill_points: i32,
+    dialogues_entered: HashSet<String>,
 }
 
 impl Player {
@@ -1383,6 +1431,37 @@ impl Player {
     }
 }
 
+impl Default for Player {
+    fn default() -> Self {
+        Self {
+        tech: 1,
+        arts: 1,
+        bur: 1, //short for bureaucracy
+        und: 1, //short for underworld
+        checkmate_mod: 0,
+        rocketry_mod: 0,
+        pathology_mod: 0,
+        civic_engineering_mod: 0,
+        apparatchik_mod: 0,
+        quota_mod: 0,
+        robot_mod: 0,
+        dossier_mod: 0,
+        delusion_mod: 0,
+        arts2_mod: 0,
+        arts3_mod: 0,
+        arts4_mod: 0,
+        high_proof_mod: 0,
+        prohibition_mod: 0,
+        gizmo_mod: 0,
+        oldtime_religion_mod: 0,
+        items: vec![],
+        xp: 0,
+        skill_points: 0,
+        dialogues_entered: HashSet::new(),
+        }
+    }
+}
+
 enum GameState {
     CharacterCreation,
     InGame,
@@ -1440,6 +1519,7 @@ impl Default for Dialogue {
                 DialogueOption::default(),
             ],
             passive_check: vec![],
+            xp_reward: None,
             is_hidden: true,
         }
     }
