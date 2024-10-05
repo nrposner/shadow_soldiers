@@ -16,6 +16,7 @@ struct DialogueApp {
     current_location_id: String,          // Current location ID
     current_dialogue_id: Option<String>,  // Current dialogue ID, or None if not in a dialogue
     state: GameState,
+    previous_dialogue_id: Option<String>,
 }
 
 struct PassiveDialogue{
