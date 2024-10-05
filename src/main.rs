@@ -28,8 +28,8 @@ impl Default for DialogueApp {
         vestibule_dialogues.insert(
             "Start".to_string(),
             Dialogue {
-            speaker: "".to_string(),
-            intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
+                speaker: "".to_string(),
+                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Inspect the grandfather clock.".to_string(),
