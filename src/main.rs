@@ -19,10 +19,6 @@ struct DialogueApp {
     previous_dialogue_id: Option<String>,
 }
 
-struct PassiveDialogue{
-
-}
-
 impl Default for DialogueApp {
     fn default() -> Self {
         let mut locations = HashMap::new();
@@ -979,6 +975,26 @@ impl eframe::App for DialogueApp {
             
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+
+
+                            // Handle the passive check if it exists
+                            if let Some(passive_check) = &current_dialogue.passive_check {
+                                // Perform the skill check
+                                let player_skill_value = self.get_player_skill(&passive_check.skill);
+                                let success = player_skill_value >= passive_check.target;
+                                
+                                if success {
+                                    if let Some(success_text) = &passive_check.success_text {
+                                        ui.heading(&format!("{} ", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.label(success_text);
+                                    }
+                                } else {
+                                    if let Some(failure_text) = &passive_check.failure_text {
+                                        ui.heading(&format!("{} ", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                        ui.label(failure_text);
+                                    }
+                                }
+                            }
             
                             // Display the speaker's name before the dialogue
                             ui.heading(&format!("{} ", current_dialogue.speaker));
@@ -1346,7 +1362,16 @@ struct Dialogue {
     speaker: String,
     intro: String,
     options: Vec<DialogueOption>,
+    passive_check: Option<PassiveCheck>, // New field for passive dialogue checks
     is_hidden: bool,
+}
+
+struct PassiveCheck {
+    skill: String,          // The player's skill to check
+    target: i32,            // The number to check against
+    success_text: Option<String>, // Text to display on success (Optional)
+    failure_text: Option<String>, // Text to display on failure (Optional)
+    speaker: Option<String>, // The speaker, who will be the same in both success and failure cases
 }
 
 impl Default for Dialogue {
