@@ -15,6 +15,7 @@ struct DialogueApp {
     locations: HashMap<String, Location>, // All locations in the game
     current_location_id: String,          // Current location ID
     current_dialogue_id: Option<String>,  // Current dialogue ID, or None if not in a dialogue
+    state: GameState,
 }
 
 struct PassiveDialogue{
@@ -636,31 +637,6 @@ impl Default for DialogueApp {
             }
         );
 
-        // vestibule_dialogues.insert(
-        //     "InspectClock".to_string(),
-        //     Dialogue {
-        //         intro: "A round, pale face crossed by dark lines stares down at you. ".to_string(),
-        //         options: vec![
-        //             DialogueOption {
-        //                 description: "Exit conversation.".to_string(), // This sends you back to Vestibule's "Start"
-        //                 challenge_attribute: None,
-        //                 challenge_number: None,
-        //                 success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-        //                 failure_dialogue: None,
-        //             },
-        //         ],
-        //         is_hidden: false,
-        //     },
-        // );
-
-
-
-
-        /////// bellhop dialogues above here
-        // replace with a grandfather clock, secrets within
-
-
-
 
         // Define sample dialogues for the First Floor
         let mut first_floor_dialogues = HashMap::new();
@@ -834,6 +810,7 @@ impl Default for DialogueApp {
             locations,
             current_location_id: "Vestibule".to_string(), // Start in the Vestibule
             current_dialogue_id: Some("Start".to_string()), // Start with the "Start" dialogue
+            state: GameState::CharacterCreation, 
         }
     }
 }
