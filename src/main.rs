@@ -1159,8 +1159,6 @@ enum GameState {
     InGame,
 }
 
-
-
 #[derive(Clone)]
 struct DialogueOption {
     description: String,
