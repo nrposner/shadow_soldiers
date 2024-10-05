@@ -838,96 +838,126 @@ impl Default for DialogueApp {
     }
 }
 
-// Implement eframe::App
+
 impl eframe::App for DialogueApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("In-Game Dialogue");
-            let current_dialogue_id_clone = self.current_dialogue_id.clone();
+        match self.state {
+            GameState::CharacterCreation => {
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    ui.heading("Character Creation");
+                    ui.label("Distribute 12 points among your four stats. Each stat must have between 1 and 6 points.");
 
-            if let Some(current_dialogue_id) = &current_dialogue_id_clone {
-                if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+                    // Sliders for each stat
+                    ui.add(egui::Slider::new(&mut self.player.tech, 1..=6).text("Tech"));
+                    ui.add(egui::Slider::new(&mut self.player.arts, 1..=6).text("Arts"));
+                    ui.add(egui::Slider::new(&mut self.player.bureaucracy, 1..=6).text("Bureaucracy"));
+                    ui.add(egui::Slider::new(&mut self.player.underworld, 1..=6).text("Underworld"));
 
-                    // Display the speaker's name before the dialogue
-                    ui.heading(&format!("{} ", current_dialogue.speaker));  // Display the speaker's name
+                    // Display remaining points
+                    let remaining_points = self.player.remaining_points();
+                    ui.label(format!("Remaining points: {}", remaining_points));
 
-                    // Display the dialogue
-                    ui.heading(&current_dialogue.intro);
-
-                    let mut new_dialogue_id = None;
-                    let mut new_location_id = None;
-
-
-                    // place passive dialogue here??
-
-                    // if let Some(current_dialogue_passives) = current_dialogue.passives{
-
-
-                    //     //use handle_passive,
-                    //     //is the passive a vector of tuples, each containing a string for the 
-                    //     //skill, an i32 number, and a string for the result on a success?
-                    //     //also may be a result on failure. Maybe there's a dialogue on 
-                    //     //failure and not on success! 
-                    // };
-
-                    //store as a vector in Dialogue object??
-
-                    
-                    ///////
-
-
-
-                    for option in current_dialogue.options.iter() {
-                        if ui.button(&option.description).clicked() {
-                            if option.challenge_number.is_some() {
-                                let success = handle_challenge(&self.player, option);
-                                if success {
-                                    // Dossier challenge success - transition to Garden
-                                    if option.success_dialogue == Some("Garden".to_string()) {
-                                        new_location_id = Some("Garden".to_string());
-                                        new_dialogue_id = Some("Start".to_string());  // Set to the Garden's start dialogue
-                                    } else {
-                                        new_dialogue_id = option.success_dialogue.clone();
+                    // Disable the "Start Game" button if the allocation is invalid
+                    if self.player.is_valid() {
+                        if ui.button("Start Game").clicked() {
+                            self.state = GameState::InGame;
+                        }
+                    } else {
+                        ui.label("Ensure all stats are between 1 and 6 points, and the total is exactly 12.");
+                    }
+                });
+            }
+            GameState::InGame => {
+                // In-game logic here
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    ui.heading("In-Game Dialogue");
+                    let current_dialogue_id_clone = self.current_dialogue_id.clone();
+        
+                    if let Some(current_dialogue_id) = &current_dialogue_id_clone {
+                        if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+        
+                            // Display the speaker's name before the dialogue
+                            ui.heading(&format!("{} ", current_dialogue.speaker));  // Display the speaker's name
+        
+                            // Display the dialogue
+                            ui.heading(&current_dialogue.intro);
+        
+                            let mut new_dialogue_id = None;
+                            let mut new_location_id = None;
+        
+        
+                            // place passive dialogue here??
+        
+                            // if let Some(current_dialogue_passives) = current_dialogue.passives{
+        
+        
+                            //     //use handle_passive,
+                            //     //is the passive a vector of tuples, each containing a string for the 
+                            //     //skill, an i32 number, and a string for the result on a success?
+                            //     //also may be a result on failure. Maybe there's a dialogue on 
+                            //     //failure and not on success! 
+                            // };
+        
+                            //store as a vector in Dialogue object??
+        
+                            
+                            ///////
+        
+        
+        
+                            for option in current_dialogue.options.iter() {
+                                if ui.button(&option.description).clicked() {
+                                    if option.challenge_number.is_some() {
+                                        let success = handle_challenge(&self.player, option);
+                                        if success {
+                                            // Dossier challenge success - transition to Garden
+                                            if option.success_dialogue == Some("Garden".to_string()) {
+                                                new_location_id = Some("Garden".to_string());
+                                                new_dialogue_id = Some("Start".to_string());  // Set to the Garden's start dialogue
+                                            } else {
+                                                new_dialogue_id = option.success_dialogue.clone();
+                                            }
+                                        } else {
+                                            new_dialogue_id = option.failure_dialogue.clone();
+                                        }
+                                    } else if let Some(success_dialogue) = &option.success_dialogue {
+                                        if self.locations.contains_key(success_dialogue) {
+                                            new_location_id = Some(success_dialogue.clone());
+                                            new_dialogue_id = None;
+                                        } else {
+                                            new_dialogue_id = Some(success_dialogue.clone());
+                                        }
                                     }
-                                } else {
-                                    new_dialogue_id = option.failure_dialogue.clone();
-                                }
-                            } else if let Some(success_dialogue) = &option.success_dialogue {
-                                if self.locations.contains_key(success_dialogue) {
-                                    new_location_id = Some(success_dialogue.clone());
-                                    new_dialogue_id = None;
-                                } else {
-                                    new_dialogue_id = Some(success_dialogue.clone());
                                 }
                             }
+        
+                            if let Some(new_id) = new_dialogue_id {
+                                self.current_dialogue_id = Some(new_id);
+                            }
+                            if let Some(new_location) = new_location_id {
+                                self.current_location_id = new_location;
+                            }
+                        }
+                    } else {
+                        ui.heading(&format!("You are in {}", self.get_current_location().name));
+        
+                        let mut new_location_id = None;
+        
+                        ui.label("Exits:");
+                        for exit in &self.get_current_location().exits {
+                            if ui.button(exit).clicked() {
+                                new_location_id = Some(exit.clone());
+                            }
+                        }
+        
+                        if let Some(new_location) = new_location_id {
+                            self.current_location_id = new_location;
+                            self.current_dialogue_id = Some("Start".to_string()); // Reset to "Start" dialogue in the new location
                         }
                     }
-
-                    if let Some(new_id) = new_dialogue_id {
-                        self.current_dialogue_id = Some(new_id);
-                    }
-                    if let Some(new_location) = new_location_id {
-                        self.current_location_id = new_location;
-                    }
-                }
-            } else {
-                ui.heading(&format!("You are in {}", self.get_current_location().name));
-
-                let mut new_location_id = None;
-
-                ui.label("Exits:");
-                for exit in &self.get_current_location().exits {
-                    if ui.button(exit).clicked() {
-                        new_location_id = Some(exit.clone());
-                    }
-                }
-
-                if let Some(new_location) = new_location_id {
-                    self.current_location_id = new_location;
-                    self.current_dialogue_id = Some("Start".to_string()); // Reset to "Start" dialogue in the new location
-                }
+                });
             }
-        });
+        }
     }
 }
 
