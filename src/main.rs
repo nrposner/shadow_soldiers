@@ -1404,6 +1404,7 @@ impl Default for Dialogue {
             options: vec![
                 DialogueOption::default(),
             ],
+            passive_check: None, 
             is_hidden: true,
         }
     }
