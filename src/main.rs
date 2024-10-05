@@ -187,7 +187,7 @@ impl Default for DialogueApp {
                     },
 
                     DialogueOption {
-                        description: "Let's fix you up, soldier.".to_string(),
+                        description: "Let's fix you up, soldier. (Gizmo 12)".to_string(),
                         challenge_attribute: Some("gizmo".to_string()),
                         challenge_number: Some(12),
                         success_dialogue: Some("ClockMissingGear".to_string()),
@@ -196,10 +196,10 @@ impl Default for DialogueApp {
                     },
 
                     DialogueOption {
-                        description: "".to_string(),
+                        description: "Close the casing.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
-                        success_dialogue: Some("".to_string()),
+                        success_dialogue: Some("InspectClock".to_string()),
                         failure_dialogue: None,
                         item_to_pickup: None,
                     },
@@ -360,13 +360,22 @@ impl Default for DialogueApp {
             "JustABrokenClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: "".to_string(),
+                intro: "*Just* a broken clock? Shows what you know. This right here is a veteran of public administration, an honored servant of the people, languishing under the failures of the regime. How dare you ignore his deeds and his suffering.".to_string(),
                 options: vec![
                     DialogueOption {
-                        description: "".to_string(),
+                        description: "Well, Grandfather Clockovitch here can languish a little longer.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
-                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        success_dialogue: Some("BrokenClock".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+
+                    DialogueOption {
+                        description: "Fine, I'll look inside. As long as there's no more creepy phrasing.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
                         item_to_pickup: None,
                     },
@@ -379,7 +388,7 @@ impl Default for DialogueApp {
             "ReligiousClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: "".to_string(),
+                intro: "Religious? What are you talking about? Grandfather Clockovitch is a ".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "".to_string(),
@@ -390,7 +399,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
-                is_hidden: true,
+                is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
 
@@ -653,6 +662,63 @@ impl Default for DialogueApp {
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockPlane".to_string(),
+            Dialogue {
+                speaker: "SU-25 Grach".to_string(),
+                intro: "This is the Sukhoi SU-25 Grach, a single-seat twin-engine close air support jet, most notable for its extensive counter-insurgency missions in Afghanistan.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Pick it up".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), 
+                        failure_dialogue: None,
+                        item_to_pickup: Some("Sukhoi SU-25 Grach model".to_string()),
+                    },
+                    DialogueOption {
+                        description: "It's only a model (Return)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        // add it's only a model passive dialogue
+
+        vestibule_dialogues.insert(
+            "ClockPlaneFail".to_string(),
+            Dialogue {
+                speaker: "Toy Plane".to_string(),
+                intro: "It's just a toy plane. Looks cool though.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Pick it up".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: Some("Toy Plane".to_string()),
+                    },
+
+                    DialogueOption {
+                        description: "(Return)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
                         item_to_pickup: None,
                     },
