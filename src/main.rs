@@ -861,6 +861,7 @@ impl eframe::App for DialogueApp {
         
                             let mut new_dialogue_id = None;
                             let mut new_location_id = None;
+                            let mut options_to_remove = vec![];
         
         
                             // place passive dialogue here??
@@ -882,8 +883,15 @@ impl eframe::App for DialogueApp {
         
         
         
-                            for option in current_dialogue.options.iter() {
+                            for (i, option) in current_dialogue.options.iter().enumerate() {
                                 if ui.button(&option.description).clicked() {
+                                    if let Some(item) = &option.item_to_pickup {
+                                        // Add item to the player's inventory
+                                        self.player.items.push(item.clone());
+        
+                                        // Mark this option to be removed after redirecting
+                                        options_to_remove.push(i);
+                                    }
                                     if option.challenge_number.is_some() {
                                         let success = handle_challenge(&self.player, option);
                                         if success {
@@ -905,6 +913,13 @@ impl eframe::App for DialogueApp {
                                             new_dialogue_id = Some(success_dialogue.clone());
                                         }
                                     }
+                                }
+                            }
+
+                            if !options_to_remove.is_empty() {
+                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
+                                for &index in options_to_remove.iter().rev() {
+                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
                                 }
                             }
         
