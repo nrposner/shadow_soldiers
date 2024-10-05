@@ -1255,7 +1255,6 @@ fn roll_dice() -> (i32, i32) {
     (rng.gen_range(1..=6), rng.gen_range(1..=6))
 }
 
-
 struct Player {
     tech: i32,
     arts: i32,
@@ -1278,6 +1277,8 @@ struct Player {
     gizmo_mod: i32,
     oldtime_religion_mod: i32,
     items: Vec<String>,
+    xp: i32,
+    skill_points: i32,
 }
 
 impl Player {
@@ -1395,6 +1396,7 @@ struct Dialogue {
     intro: String,
     options: Vec<DialogueOption>,
     passive_check: Vec<PassiveCheck>, // New field for passive dialogue checks
+    xp_reward: Option<i32>,
     is_hidden: bool,
 }
 
