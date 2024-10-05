@@ -1131,6 +1131,16 @@ impl DialogueApp {
             ui.label("No dialogue available.");
         }
     }
+
+    fn get_player_skill(&self, skill: &str) -> i32 {
+        match skill {
+            "tech" => self.player.tech,
+            "arts" => self.player.arts,
+            "bureaucracy" => self.player.bur,
+            "underworld" => self.player.und,
+            _ => 0,  // Default to 0 if the skill doesn't exist
+        }
+    }
 }
 
 // Challenge logic
