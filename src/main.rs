@@ -985,14 +985,16 @@ impl DialogueApp {
     fn get_current_location(&self) -> &Location {
         self.locations.get(&self.current_location_id).unwrap()
     }
-}
 
-// displaying inventory
-//not yet really implemented, need to esablish a way for player to see it
-fn display_inventory(&self, ui: &mut egui::Ui) {
-    ui.heading("Inventory:");
-    for item in &self.player.items {
-        ui.label(item);
+    fn display_inventory(&self, ui: &mut egui::Ui) {
+        ui.heading("Inventory:");
+        if self.player.items.is_empty() {
+            ui.label("You have no items.");
+        } else {
+            for item in &self.player.items {
+                ui.label(item);
+            }
+        }
     }
 }
 
