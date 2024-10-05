@@ -827,8 +827,8 @@ impl eframe::App for DialogueApp {
                     // Sliders for each stat
                     ui.add(egui::Slider::new(&mut self.player.tech, 1..=6).text("Tech"));
                     ui.add(egui::Slider::new(&mut self.player.arts, 1..=6).text("Arts"));
-                    ui.add(egui::Slider::new(&mut self.player.bureaucracy, 1..=6).text("Bureaucracy"));
-                    ui.add(egui::Slider::new(&mut self.player.underworld, 1..=6).text("Underworld"));
+                    ui.add(egui::Slider::new(&mut self.player.bur, 1..=6).text("Bureaucracy"));
+                    ui.add(egui::Slider::new(&mut self.player.und, 1..=6).text("Underworld"));
 
                     // Display remaining points
                     let remaining_points = self.player.remaining_points();
