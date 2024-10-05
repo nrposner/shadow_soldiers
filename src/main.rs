@@ -1022,6 +1022,16 @@ impl eframe::App for DialogueApp {
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
 
+                            // Check if the player has already entered this dialogue
+                            if !self.player.dialogues_entered.contains(current_dialogue_id) {
+                                // Award XP if the dialogue has an XP reward and this is the first time entering
+                                if let Some(xp_reward) = current_dialogue.xp_reward {
+                                    self.player.add_xp(xp_reward);
+                                    println!("You gained {} XP!", xp_reward);
+                                }
+                                // Mark the dialogue as entered
+                                self.player.dialogues_entered.insert(current_dialogue_id.clone());
+                            }
 
                             // Handle multiple passive checks if they exist
                             for passive_check in &current_dialogue.passive_check {
