@@ -16,6 +16,7 @@ struct DialogueApp {
     current_location_id: String,          // Current location ID
     current_dialogue_id: Option<String>,  // Current dialogue ID, or None if not in a dialogue
     state: GameState,
+    previous_dialogue_id: Option<String>,
 }
 
 struct PassiveDialogue{
@@ -40,6 +41,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("InspectClock".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                     DialogueOption {
                         description: "Go to the first floor.".to_string(),
@@ -47,6 +49,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("FirstFloor".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -65,6 +68,7 @@ impl Default for DialogueApp {
                         challenge_number: Some(12),
                         success_dialogue: Some("HungryClock".to_string()), 
                         failure_dialogue: Some("MockingClock".to_string()),
+                        item_to_pickup: None,
 
                         // hungry for the gear? it wants to eat its beating heart. Can give you a hint of where to find it
                     },
@@ -77,6 +81,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("BrokenClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -85,6 +90,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -103,6 +109,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -121,6 +128,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockRecommends".to_string()), //gizmo to fix it, or telling you to open it up to do so
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -129,6 +137,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockFutile".to_string()), //futilely ask if this is morning or night
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -137,6 +146,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockSalute".to_string()), //salute it
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -145,6 +155,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), //exit
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -172,22 +183,25 @@ impl Default for DialogueApp {
                         challenge_number: Some(6),
                         success_dialogue: Some("ClockPlane".to_string()),
                         failure_dialogue: Some("ClockPlaneFail".to_string()),
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
-                        description: "Let's fix you up, soldier.".to_string(),
+                        description: "Let's fix you up, soldier. (Gizmo 12)".to_string(),
                         challenge_attribute: Some("gizmo".to_string()),
                         challenge_number: Some(12),
                         success_dialogue: Some("ClockMissingGear".to_string()),
                         failure_dialogue: Some("ClockFixImpossible".to_string()),
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
-                        description: "".to_string(),
+                        description: "Close the casing.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
-                        success_dialogue: Some("".to_string()),
+                        success_dialogue: Some("InspectClock".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -206,6 +220,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -214,6 +229,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockDecline".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -232,6 +248,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -240,6 +257,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -258,6 +276,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("BrokenClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -266,6 +285,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockPhrasing".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -274,6 +294,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -292,6 +313,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("JustABrokenClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -300,6 +322,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ReligiousClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -308,6 +331,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockSuggestive".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -316,6 +340,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("BrokenClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -324,6 +349,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockInterior".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -334,14 +360,24 @@ impl Default for DialogueApp {
             "JustABrokenClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: "".to_string(),
+                intro: "*Just* a broken clock? Shows what you know. This right here is a veteran of public administration, an honored servant of the people, languishing under the failures of the regime. How dare you ignore his deeds and his suffering.".to_string(),
                 options: vec![
                     DialogueOption {
-                        description: "".to_string(),
+                        description: "Well, Grandfather Clockovitch here can languish a little longer.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
-                        success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
+                        success_dialogue: Some("BrokenClock".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+
+                    DialogueOption {
+                        description: "Fine, I'll look inside. As long as there's no more creepy phrasing.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -352,7 +388,7 @@ impl Default for DialogueApp {
             "ReligiousClock".to_string(),
             Dialogue {
                 speaker: "Grandfather Clock".to_string(),
-                intro: "".to_string(),
+                intro: "Religious? What are you talking about? Grandfather Clockovitch is a ".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "".to_string(),
@@ -360,9 +396,10 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
-                is_hidden: true,
+                is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
 
@@ -378,6 +415,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockSexual".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -386,6 +424,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("BrokenClock".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -404,6 +443,7 @@ impl Default for DialogueApp {
                         challenge_number: Some(8),
                         success_dialogue: Some("ClockPerversion".to_string()), //Pathology check to justify yourself
                         failure_dialogue: Some("ClockTrauma".to_string()),
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -412,6 +452,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockEmphasis".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -420,6 +461,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockSexualReligion".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -438,6 +480,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockCIA".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -446,6 +489,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockExplanation".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -464,6 +508,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockNotTrauma".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -472,6 +517,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ClockRepression".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -490,6 +536,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -508,6 +555,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -526,6 +574,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -558,6 +607,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -566,6 +616,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
 
                     DialogueOption {
@@ -574,6 +625,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), 
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -592,6 +644,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -610,6 +663,64 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        vestibule_dialogues.insert(
+            "ClockPlane".to_string(),
+            Dialogue {
+                speaker: "SU-25 Grach".to_string(),
+                intro: "This is the Sukhoi SU-25 Grach, a single-seat twin-engine close air support jet, most notable for its extensive counter-insurgency missions in Afghanistan.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Pick it up".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), 
+                        failure_dialogue: None,
+                        item_to_pickup: Some("Sukhoi SU-25 Grach model".to_string()),
+                    },
+                    DialogueOption {
+                        description: "It's only a model (Return)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                ],
+                is_hidden: true,
+            }
+        );
+
+        // add it's only a model passive dialogue
+
+        vestibule_dialogues.insert(
+            "ClockPlaneFail".to_string(),
+            Dialogue {
+                speaker: "Toy Plane".to_string(),
+                intro: "It's just a toy plane. Looks cool though.".to_string(),
+                options: vec![
+                    DialogueOption {
+                        description: "Pick it up".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: Some("Toy Plane".to_string()),
+                    },
+
+                    DialogueOption {
+                        description: "(Return)".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
+                        failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -631,6 +742,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: true,
@@ -652,6 +764,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("ButlerResponse".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                     DialogueOption {
                         description: "Try to open the stuck door (Dossier challenge).".to_string(),
@@ -659,6 +772,7 @@ impl Default for DialogueApp {
                         challenge_number: Some(12),
                         success_dialogue: Some("Garden".to_string()),
                         failure_dialogue: Some("FailedDoor".to_string()),
+                        item_to_pickup: None,
                     },
                     DialogueOption {
                         description: "Go back to the vestibule.".to_string(),
@@ -666,6 +780,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Vestibule".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -685,6 +800,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -703,6 +819,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the first floor's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -723,6 +840,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("OldWomanResponse".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                     DialogueOption {
                         description: "Go back to the first floor.".to_string(),
@@ -730,6 +848,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("FirstFloor".to_string()),
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -749,6 +868,7 @@ impl Default for DialogueApp {
                         challenge_number: None,
                         success_dialogue: Some("Start".to_string()), // Go back to the Garden's main dialogue
                         failure_dialogue: None,
+                        item_to_pickup: None,
                     },
                 ],
                 is_hidden: false,
@@ -806,11 +926,13 @@ impl Default for DialogueApp {
                 prohibition_mod: 0,
                 gizmo_mod: 0,
                 oldtime_religion_mod: 0,
+                items: vec![],
             },
             locations,
             current_location_id: "Vestibule".to_string(), // Start in the Vestibule
             current_dialogue_id: Some("Start".to_string()), // Start with the "Start" dialogue
             state: GameState::CharacterCreation, 
+            previous_dialogue_id: None,
         }
     }
 }
@@ -849,51 +971,33 @@ impl eframe::App for DialogueApp {
                 egui::CentralPanel::default().show(ctx, |ui| {
                     ui.heading("In-Game Dialogue");
                     let current_dialogue_id_clone = self.current_dialogue_id.clone();
-        
+            
+                    let mut new_dialogue_id = None;
+                    let mut new_location_id = None;
+                    let mut options_to_remove = vec![];
+                    let mut items_to_add = vec![]; // Store items to be added after the immutable borrow ends
+            
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
-        
+            
                             // Display the speaker's name before the dialogue
-                            ui.heading(&format!("{} ", current_dialogue.speaker));  // Display the speaker's name
-        
+                            ui.heading(&format!("{} ", current_dialogue.speaker));
+            
                             // Display the dialogue
                             ui.heading(&current_dialogue.intro);
-        
-                            let mut new_dialogue_id = None;
-                            let mut new_location_id = None;
-        
-        
-                            // place passive dialogue here??
-        
-                            // if let Some(current_dialogue_passives) = current_dialogue.passives{
-        
-        
-                            //     //use handle_passive,
-                            //     //is the passive a vector of tuples, each containing a string for the 
-                            //     //skill, an i32 number, and a string for the result on a success?
-                            //     //also may be a result on failure. Maybe there's a dialogue on 
-                            //     //failure and not on success! 
-                            // };
-        
-                            //store as a vector in Dialogue object??
-        
-                            
-                            ///////
-        
-        
-        
-                            for option in current_dialogue.options.iter() {
+            
+                            for (i, option) in current_dialogue.options.iter().enumerate() {
                                 if ui.button(&option.description).clicked() {
+                                    // Clone the item to be picked up to avoid immutable borrow conflicts
+                                    if let Some(item) = &option.item_to_pickup {
+                                        items_to_add.push(item.clone());  // Add item to be processed later
+                                        options_to_remove.push(i);        // Remove option after it's clicked
+                                    }
+            
                                     if option.challenge_number.is_some() {
                                         let success = handle_challenge(&self.player, option);
                                         if success {
-                                            // Dossier challenge success - transition to Garden
-                                            if option.success_dialogue == Some("Garden".to_string()) {
-                                                new_location_id = Some("Garden".to_string());
-                                                new_dialogue_id = Some("Start".to_string());  // Set to the Garden's start dialogue
-                                            } else {
-                                                new_dialogue_id = option.success_dialogue.clone();
-                                            }
+                                            new_dialogue_id = option.success_dialogue.clone();
                                         } else {
                                             new_dialogue_id = option.failure_dialogue.clone();
                                         }
@@ -907,36 +1011,55 @@ impl eframe::App for DialogueApp {
                                     }
                                 }
                             }
-        
-                            if let Some(new_id) = new_dialogue_id {
-                                self.current_dialogue_id = Some(new_id);
+            
+                            // Now that we are outside the immutable borrow of `current_dialogue`, we can safely mutate `self.player.items`
+                            for item in items_to_add {
+                                self.player.items.push(item);
                             }
-                            if let Some(new_location) = new_location_id {
-                                self.current_location_id = new_location;
-                            }
-                        }
-                    } else {
-                        ui.heading(&format!("You are in {}", self.get_current_location().name));
-        
-                        let mut new_location_id = None;
-        
-                        ui.label("Exits:");
-                        for exit in &self.get_current_location().exits {
-                            if ui.button(exit).clicked() {
-                                new_location_id = Some(exit.clone());
+            
+                            if !options_to_remove.is_empty() {
+                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
+                                for &index in options_to_remove.iter().rev() {
+                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
+                                }
                             }
                         }
-        
-                        if let Some(new_location) = new_location_id {
-                            self.current_location_id = new_location;
-                            self.current_dialogue_id = Some("Start".to_string()); // Reset to "Start" dialogue in the new location
-                        }
+                    }
+            
+                    if let Some(new_id) = new_dialogue_id {
+                        self.current_dialogue_id = Some(new_id);
+                    }
+                    if let Some(new_location) = new_location_id {
+                        self.current_location_id = new_location;
+                    }
+            
+                    // Add the "View Inventory" button
+                    if ui.button("View Inventory").clicked() {
+                        self.previous_dialogue_id = self.current_dialogue_id.clone();
+                        self.state = GameState::InventoryView;
+                    }
+                });
+            }
+            
+            
+
+            GameState::InventoryView => {
+                // Display the player's inventory
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    self.display_inventory(ui);
+
+                    // Add a button to return to the previous dialogue/location
+                    if ui.button("Return to Game").clicked() {
+                        // Return to the previous dialogue and switch back to InGame state
+                        self.current_dialogue_id = self.previous_dialogue_id.clone();
+                        self.state = GameState::InGame;
                     }
                 });
             }
         }
     }
 }
+
 
 
 // Add a helper function to get the dialogue based on the cloned dialogue ID
@@ -948,8 +1071,49 @@ impl DialogueApp {
         None
     }
 
+    fn get_current_dialogue_from_id_mut(&mut self, dialogue_id: &String) -> Option<&mut Dialogue> {
+        // Access the current location and retrieve the dialogue mutably
+        if let Some(location) = self.locations.get_mut(&self.current_location_id) {
+            return location.dialogues.get_mut(dialogue_id);
+        }
+        None
+    }
+
     fn get_current_location(&self) -> &Location {
         self.locations.get(&self.current_location_id).unwrap()
+    }
+
+    fn display_inventory(&self, ui: &mut egui::Ui) {
+        ui.heading("Inventory:");
+        if self.player.items.is_empty() {
+            ui.label("You have no items.");
+        } else {
+            for item in &self.player.items {
+                ui.label(item);
+            }
+        }
+    }
+
+    fn display_current_dialogue(&mut self, ui: &mut egui::Ui) {
+        if let Some(current_dialogue_id) = &self.current_dialogue_id {
+            if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+                ui.heading(&format!("{} says:", current_dialogue.speaker));
+                ui.heading(&current_dialogue.intro);
+
+                let mut new_dialogue_id = None;
+                for option in current_dialogue.options.iter() {
+                    if ui.button(&option.description).clicked() {
+                        new_dialogue_id = option.success_dialogue.clone();
+                    }
+                }
+
+                if let Some(new_id) = new_dialogue_id {
+                    self.current_dialogue_id = Some(new_id);
+                }
+            }
+        } else {
+            ui.label("No dialogue available.");
+        }
     }
 }
 
@@ -1064,7 +1228,8 @@ struct Player {
     high_proof_mod: i32,
     prohibition_mod: i32,
     gizmo_mod: i32,
-    oldtime_religion_mod: i32
+    oldtime_religion_mod: i32,
+    items: Vec<String>,
 }
 
 impl Player {
@@ -1150,6 +1315,7 @@ impl Player {
 enum GameState {
     CharacterCreation,
     InGame,
+    InventoryView,
 }
 
 #[derive(Clone)]
@@ -1159,6 +1325,7 @@ struct DialogueOption {
     challenge_number: Option<i32>,
     success_dialogue: Option<String>,
     failure_dialogue: Option<String>,
+    item_to_pickup: Option<String>,
 }
 
 impl Default for DialogueOption {
@@ -1169,6 +1336,7 @@ impl Default for DialogueOption {
             challenge_number: None,
             success_dialogue: Some("Start".to_string()),
             failure_dialogue: None,
+            item_to_pickup: None,
         }
     }
 }
