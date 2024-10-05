@@ -949,7 +949,25 @@ impl eframe::App for DialogueApp {
                         }
                     }
                 });
+
+                if ui.button("View Inventory").clicked() {
+                    // Save current dialogue/location before switching to inventory view
+                    self.previous_dialogue_id = self.current_dialogue_id.clone();
+                    self.state = GameState::InventoryView;
+                }
             }
+
+            GameState::InventoryView => {
+                // Display the player's inventory
+                self.display_inventory(ui);
+
+                // Add a button to return to the previous dialogue/location
+                if ui.button("Return to Game").clicked() {
+                    // Return to the previous dialogue and switch back to InGame state
+                    self.current_dialogue_id = self.previous_dialogue_id.clone();
+                    self.state = GameState::InGame;
+                }
+            
         }
     }
 }
