@@ -90,7 +90,23 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
-                passive_check: vec![],
+                passive_check: vec![
+                    PassiveCheck {
+                        skill: "robot".to_string(),
+                        target: 8,
+                        success_text: Some("You know its kind. The unrelenting metronome to which you dance.".to_string()),
+                        failure_text: None,
+                        speaker: Some("Robot".to_string())
+                    },
+                    PassiveCheck {
+                        skill: "gizmo".to_string(),
+                        target: 10,
+                        success_text: Some("It's in bad shape, boss. The varnish is falling off, the face needs a solid wipe down, 
+                        and I don't see a notice of last maintenance *anywhere*.".to_string()),
+                        failure_text: None,
+                        speaker: Some("Gizmo".to_string())
+                    },
+                ],
                 is_hidden: true,
             },
         );
