@@ -1159,6 +1159,7 @@ struct DialogueOption {
     challenge_number: Option<i32>,
     success_dialogue: Option<String>,
     failure_dialogue: Option<String>,
+    item_to_pickup: Option<String>,
 }
 
 impl Default for DialogueOption {
@@ -1169,6 +1170,7 @@ impl Default for DialogueOption {
             challenge_number: None,
             success_dialogue: Some("Start".to_string()),
             failure_dialogue: None,
+            item_to_pickup: None
         }
     }
 }
