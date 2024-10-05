@@ -48,6 +48,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -89,6 +90,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             },
         );
@@ -108,6 +110,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -154,6 +157,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -200,6 +204,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -228,6 +233,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -256,6 +262,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -293,6 +300,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -348,6 +356,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -376,6 +385,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -395,6 +405,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
@@ -423,6 +434,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -460,6 +472,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -488,6 +501,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -516,6 +530,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -535,6 +550,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -554,6 +570,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -573,6 +590,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -624,6 +642,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -643,6 +662,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -662,6 +682,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -689,6 +710,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -719,6 +741,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -741,6 +764,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: true,
             }
         );
@@ -779,6 +803,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -799,6 +824,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -818,6 +844,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -847,6 +874,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -867,6 +895,7 @@ impl Default for DialogueApp {
                         item_to_pickup: None,
                     },
                 ],
+                passive_check: vec![],
                 is_hidden: false,
             },
         );
@@ -1384,7 +1413,7 @@ struct Dialogue {
     speaker: String,
     intro: String,
     options: Vec<DialogueOption>,
-    passive_check: Option<PassiveCheck>, // New field for passive dialogue checks
+    passive_check: Vec<PassiveCheck>, // New field for passive dialogue checks
     is_hidden: bool,
 }
 
@@ -1404,7 +1433,7 @@ impl Default for Dialogue {
             options: vec![
                 DialogueOption::default(),
             ],
-            passive_check: None, 
+            passive_check: vec![],
             is_hidden: true,
         }
     }
