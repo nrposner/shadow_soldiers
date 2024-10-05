@@ -1409,17 +1409,6 @@ impl Default for Dialogue {
     }
 }
 
-//not clea this needs to be a separate Dialogue type, since we also want it to live in the regular hashmap
-
-// #[derive(Clone)]
-// struct PassiveDialogue{
-//     skill: String,
-//     passive_number: i32,
-//     dialogue: Dialogue,
-// }
-
-//set defaults friendly to passive dialogue for regular dialogue
-
 
 fn main() {
     let app = DialogueApp::default();
