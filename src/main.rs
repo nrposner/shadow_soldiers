@@ -980,7 +980,7 @@ impl eframe::App for DialogueApp {
                             // Handle the passive check if it exists
                             if let Some(passive_check) = &current_dialogue.passive_check {
                                 // Perform the skill check
-                                let player_skill_value = self.get_player_skill(&passive_check.skill);
+                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
                                 let success = player_skill_value >= passive_check.target;
                                 
                                 if success {
