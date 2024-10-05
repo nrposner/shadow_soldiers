@@ -93,14 +93,14 @@ impl Default for DialogueApp {
                 passive_check: vec![
                     PassiveCheck {
                         skill: "robot".to_string(),
-                        target: 8,
+                        target: 10,
                         success_text: Some("You know its kind. The unrelenting metronome to which you dance.".to_string()),
                         failure_text: None,
                         speaker: Some("Robot".to_string())
                     },
                     PassiveCheck {
                         skill: "gizmo".to_string(),
-                        target: 10,
+                        target: 12,
                         success_text: Some("It's in bad shape, boss. The varnish is falling off, the face needs a solid wipe down, 
                         and I don't see a notice of last maintenance *anywhere*.".to_string()),
                         failure_text: None,
@@ -1023,9 +1023,9 @@ impl eframe::App for DialogueApp {
 
 
                             // Handle multiple passive checks if they exist
-                            for passive_check in &current_dialogue.passive_checks {
+                            for passive_check in &current_dialogue.passive_check {
                                 // Perform the skill check
-                                let player_skill_value = self.get_player_skill(&passive_check.skill);
+                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
                                 let success = player_skill_value >= passive_check.target;
 
                                 if success {
@@ -1256,41 +1256,6 @@ fn roll_dice() -> (i32, i32) {
 }
 
 
-fn handle_passive(player: &Player, option: &DialogueOption) -> bool {
-    if let Some(challenge_attribute) = &option.challenge_attribute {
-        if let Some(challenge_number) = option.challenge_number {
-            let attribute_value = match challenge_attribute.as_str() {
-                "checkmate" => player.checkmate(),
-                "rocketry" => player.rocketry(),
-                "pathology" => player.pathology(),
-                "civic engineering" => player.civic_engineering(),
-                "apparatchik" => player.apparatchik(),
-                "quota" => player.quota(),
-                "robot" => player.robot(),
-                "dossier" => player.dossier(),
-                "delusion" => player.delusion(),
-                "arts2" => player.arts2(),
-                "arts3" => player.arts3(),
-                "arts4" => player.arts4(),
-                "high proof" => player.high_proof(),
-                "prohibition" => player.prohibition(),
-                "gizmo" => player.gizmo(),
-                "oldtime religion" => player.oldtime_religion(),
-                _ => 0,
-            };
-
-            let total = 6 + attribute_value;
-            if total >= challenge_number {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    false
-}
-
-
 struct Player {
     tech: i32,
     arts: i32,
@@ -1433,6 +1398,7 @@ struct Dialogue {
     is_hidden: bool,
 }
 
+#[derive(Clone)]
 struct PassiveCheck {
     skill: String,          // The player's skill to check
     target: i32,            // The number to check against
