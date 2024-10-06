@@ -1,6 +1,7 @@
 use eframe::{egui, Frame};
 use rand::Rng;
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 // Define Location structure
 struct Location {
@@ -29,13 +30,21 @@ impl Default for DialogueApp {
             "Start".to_string(),
             Dialogue {
                 speaker: "".to_string(),
-                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
+                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grid of mailboxes wait, closed, and a grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Inspect the grandfather clock.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("InspectClock".to_string()),
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                    DialogueOption {
+                        description: "Look in the mailboxes.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Vestibule Mailboxes".to_string()),
                         failure_dialogue: None,
                         item_to_pickup: None,
                     },
@@ -49,6 +58,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -107,6 +117,7 @@ impl Default for DialogueApp {
                         speaker: Some("Gizmo".to_string())
                     },
                 ],
+                xp_reward: None,
                 is_hidden: true,
             },
         );
@@ -127,6 +138,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -174,6 +186,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -221,6 +234,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -250,6 +264,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -279,6 +294,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -317,6 +333,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -373,6 +390,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -402,6 +420,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -422,6 +441,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
             }
         );
@@ -451,6 +471,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -489,6 +510,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -518,6 +540,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -547,6 +570,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -567,6 +591,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -587,6 +612,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -607,6 +633,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -659,6 +686,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -679,6 +707,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: Some(10),
                 is_hidden: true,
             }
         );
@@ -699,6 +728,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -727,6 +757,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: Some(5),
                 is_hidden: true,
             }
         );
@@ -758,6 +789,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -781,6 +813,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: true,
             }
         );
@@ -820,6 +853,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -841,6 +875,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -861,6 +896,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -891,6 +927,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
@@ -912,11 +949,34 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
+                xp_reward: None,
                 is_hidden: false,
             },
         );
 
+        let mut outdoors_dialogues = HashMap::new();
+
+        let mut second_floor_dialogues = HashMap::new();
+
+        let mut third_floor_dialogues = HashMap::new();
+
+        let mut fourth_floor_dialogues = HashMap::new();
+
+        let mut rooftop_garden_dialogues = HashMap::new();
+
+        let mut admin_room_dialogues = HashMap::new();
+
         // Define Locations
+
+        locations.insert(
+            "Outdoors".to_string(),
+            Location {
+                name: "Outdoors".to_string(),
+                dialogues: outdoors_dialogues,
+                exits: vec!["Vestibule".to_string(),]
+            }
+        );
+
         locations.insert(
             "Vestibule".to_string(),
             Location {
@@ -931,9 +991,56 @@ impl Default for DialogueApp {
             Location {
                 name: "The First Floor".to_string(),
                 dialogues: first_floor_dialogues,
-                exits: vec!["Vestibule".to_string(), "Garden".to_string()],
+                exits: vec!["Vestibule".to_string(), "SecondFloor".to_string(), "ThirdFloor".to_string(), "FourthFloor".to_string(),],
             },
         );
+
+        locations.insert(
+            "SecondFloor".to_string(),
+            Location {
+                name: "The Second Floor".to_string(),
+                dialogues: second_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "ThirdFloor".to_string(), "FourthFloor".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "ThirdFloor".to_string(),
+            Location {
+                name: "The Third Floor".to_string(),
+                dialogues: third_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "SecondFloor".to_string(), "FourthFloor".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "FourthFloor".to_string(),
+            Location {
+                name: "The Fourth Floor".to_string(),
+                dialogues: fourth_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "SecondFloor".to_string(), "ThirdFloor".to_string(), "RooftopGarden".to_string(), "AdministratorRoom".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "AdministratorRoom".to_string(),
+            Location {
+                name: "Administrator's Room".to_string(),
+                dialogues: admin_room_dialogues,
+                exits: vec!["FourthFloor".to_string()],
+            },
+        );
+
+
+        locations.insert(
+            "RooftopGarden".to_string(),
+            Location {
+                name: "Rooftop Garden".to_string(),
+                dialogues: rooftop_garden_dialogues,
+                exits: vec!["FourthFloor".to_string()],
+            },
+        );
+
 
         locations.insert(
             "Garden".to_string(),
@@ -947,10 +1054,10 @@ impl Default for DialogueApp {
         Self {
             current_text: "Welcome!".to_string(),
             player: Player {
-                tech: 2,
-                arts: 4,
-                bur: 1, //short for bureaucracy
-                und: 2, //short for underworld
+                tech: 3,
+                arts: 3,
+                bur: 3, //short for bureaucracy
+                und: 3, //short for underworld
                 checkmate_mod: 0,
                 rocketry_mod: 0,
                 pathology_mod: 0,
@@ -968,6 +1075,9 @@ impl Default for DialogueApp {
                 gizmo_mod: 0,
                 oldtime_religion_mod: 0,
                 items: vec![],
+                xp: 0,
+                skill_points: 0,
+                dialogues_entered: HashSet::new(),
             },
             locations,
             current_location_id: "Vestibule".to_string(), // Start in the Vestibule
@@ -1011,23 +1121,90 @@ impl eframe::App for DialogueApp {
                 // In-game logic here
                 egui::CentralPanel::default().show(ctx, |ui| {
                     ui.heading("In-Game Dialogue");
+                    
                     let current_dialogue_id_clone = self.current_dialogue_id.clone();
-            
                     let mut new_dialogue_id = None;
                     let mut new_location_id = None;
-                    let mut options_to_remove = vec![];
-                    let mut items_to_add = vec![]; // Store items to be added after the immutable borrow ends
-            
+                    let mut options_to_remove = vec![];    // Store which options to remove
+                    let mut items_to_add = vec![];         // Store items to add to inventory after borrow ends
+                    let mut xp_reward = None;              // Store XP reward for later processing
+                    let mut passive_checks = vec![];       // Store passive checks to process later
+                    
                     if let Some(current_dialogue_id) = &current_dialogue_id_clone {
+                        // First, get the current dialogue immutably
                         if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
-
-
-                            // Handle multiple passive checks if they exist
-                            for passive_check in &current_dialogue.passive_check {
-                                // Perform the skill check
-                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;
+                            
+                            // Extract the XP reward
+                            xp_reward = current_dialogue.xp_reward;
+                            
+                            // Extract passive checks for later use
+                            passive_checks = current_dialogue.passive_check.clone();
+                            
+                            // Display the speaker's name before the dialogue
+                            ui.heading(&format!("{} ", current_dialogue.speaker));
+                            
+                            // Display the dialogue
+                            ui.heading(&current_dialogue.intro);
+                            
+                            // Iterate through the dialogue options
+                            for (i, option) in current_dialogue.options.iter().enumerate() {
+                                if ui.button(&option.description).clicked() {
+                                    // Clone the item to be picked up to avoid immutable borrow conflicts
+                                    if let Some(item) = &option.item_to_pickup {
+                                        items_to_add.push(item.clone());  // Add the item for later processing
+                                        options_to_remove.push(i);        // Mark this option for removal
+                                    }
+            
+                                    // Handle challenges and dialogue transitions
+                                    if option.challenge_number.is_some() {
+                                        let success = handle_challenge(&self.player, option);
+                                        if success {
+                                            new_dialogue_id = option.success_dialogue.clone();
+                                        } else {
+                                            new_dialogue_id = option.failure_dialogue.clone();
+                                        }
+                                    } else if let Some(success_dialogue) = &option.success_dialogue {
+                                        // Handle transition to a new location or dialogue
+                                        if self.locations.contains_key(success_dialogue) {
+                                            new_location_id = Some(success_dialogue.clone());
+                                            new_dialogue_id = None;
+                                        } else {
+                                            new_dialogue_id = Some(success_dialogue.clone());
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            // Now that the immutable borrow of `current_dialogue` has ended, we can safely mutate `self.player`
+                            
+                            // Add items to inventory
+                            for item in items_to_add {
+                                self.player.items.push(item);
+                            }
+                            
+                            // Remove options that have been interacted with
+                            if !options_to_remove.is_empty() {
+                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
+                                for &index in options_to_remove.iter().rev() {
+                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
+                                }
+                            }
+                            
+                            // Award XP if this is the first time entering the dialogue
+                            if !self.player.dialogues_entered.contains(current_dialogue_id) {
+                                if let Some(xp_amount) = xp_reward {
+                                    self.player.add_xp(xp_amount);
+                                    println!("You gained {} XP!", xp_amount);
+                                }
+                                // Mark the dialogue as entered
+                                self.player.dialogues_entered.insert(current_dialogue_id.clone());
+                            }
+            
+                            // Handle passive checks
+                            for passive_check in passive_checks {
+                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;  // Assume some modifier for skill checks
                                 let success = player_skill_value >= passive_check.target;
-
+                                
                                 if success {
                                     if let Some(success_text) = &passive_check.success_text {
                                         ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
@@ -1040,53 +1217,10 @@ impl eframe::App for DialogueApp {
                                     }
                                 }
                             }
-            
-                            // Display the speaker's name before the dialogue
-                            ui.heading(&format!("{} ", current_dialogue.speaker));
-            
-                            // Display the dialogue
-                            ui.heading(&current_dialogue.intro);
-            
-                            for (i, option) in current_dialogue.options.iter().enumerate() {
-                                if ui.button(&option.description).clicked() {
-                                    // Clone the item to be picked up to avoid immutable borrow conflicts
-                                    if let Some(item) = &option.item_to_pickup {
-                                        items_to_add.push(item.clone());  // Add item to be processed later
-                                        options_to_remove.push(i);        // Remove option after it's clicked
-                                    }
-            
-                                    if option.challenge_number.is_some() {
-                                        let success = handle_challenge(&self.player, option);
-                                        if success {
-                                            new_dialogue_id = option.success_dialogue.clone();
-                                        } else {
-                                            new_dialogue_id = option.failure_dialogue.clone();
-                                        }
-                                    } else if let Some(success_dialogue) = &option.success_dialogue {
-                                        if self.locations.contains_key(success_dialogue) {
-                                            new_location_id = Some(success_dialogue.clone());
-                                            new_dialogue_id = None;
-                                        } else {
-                                            new_dialogue_id = Some(success_dialogue.clone());
-                                        }
-                                    }
-                                }
-                            }
-            
-                            // Now that we are outside the immutable borrow of `current_dialogue`, we can safely mutate `self.player.items`
-                            for item in items_to_add {
-                                self.player.items.push(item);
-                            }
-            
-                            if !options_to_remove.is_empty() {
-                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
-                                for &index in options_to_remove.iter().rev() {
-                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
-                                }
-                            }
                         }
                     }
             
+                    // Handle dialogue or location transition
                     if let Some(new_id) = new_dialogue_id {
                         self.current_dialogue_id = Some(new_id);
                     }
@@ -1099,8 +1233,15 @@ impl eframe::App for DialogueApp {
                         self.previous_dialogue_id = self.current_dialogue_id.clone();
                         self.state = GameState::InventoryView;
                     }
+
+                    // Add the "Manage Skills" button
+                    if ui.button("Manage Skills").clicked() {
+                        self.previous_dialogue_id = self.current_dialogue_id.clone();
+                        self.state = GameState::SkillManagement;  // Switch to skill management state
+                    }
                 });
             }
+            
             
             
 
@@ -1117,6 +1258,150 @@ impl eframe::App for DialogueApp {
                     }
                 });
             }
+
+            GameState::SkillManagement => {
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    ui.heading("Skill Management");
+                    
+                    // Display available skill points
+                    ui.label(format!("Available Skill Points: {}", self.player.skill_points));
+                    
+                    // Display current skills and add buttons to increase skills
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Checkmate: {}", self.player.checkmate()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.checkmate_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Rocketry: {}", self.player.rocketry()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.rocketry_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Pathology: {}", self.player.pathology()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.pathology_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Civic Engineering: {}", self.player.civic_engineering()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.civic_engineering_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Delusion: {}", self.player.delusion()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.delusion_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts2: {}", self.player.arts2()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts2_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts3: {}", self.player.arts3()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts3_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts4: {}", self.player.arts4()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts4_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Quota: {}", self.player.quota()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.quota_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Apparatchik: {}", self.player.apparatchik()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.apparatchik_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Robot: {}", self.player.robot()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.robot_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Dossier: {}", self.player.dossier()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.dossier_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: High Proof: {}", self.player.high_proof()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.high_proof_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Prohibition: {}", self.player.prohibition()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.prohibition_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Gizmo: {}", self.player.gizmo()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.gizmo_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Oldtime Religion: {}", self.player.oldtime_religion()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.oldtime_religion_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    // Add a button to return to the game
+                    if ui.button("Return to Game").clicked() {
+                        self.state = GameState::InGame;
+                    }
+                });
+            }
+            
         }
     }
 }
@@ -1255,7 +1540,6 @@ fn roll_dice() -> (i32, i32) {
     (rng.gen_range(1..=6), rng.gen_range(1..=6))
 }
 
-
 struct Player {
     tech: i32,
     arts: i32,
@@ -1278,6 +1562,9 @@ struct Player {
     gizmo_mod: i32,
     oldtime_religion_mod: i32,
     items: Vec<String>,
+    xp: i32,
+    skill_points: i32,
+    dialogues_entered: HashSet<String>,
 }
 
 impl Player {
@@ -1358,12 +1645,55 @@ impl Player {
             && self.tech <= 6 && self.arts <= 6 && self.bur <= 6 && self.und <= 6
             && self.total_points() == 12
     }
+
+    fn add_xp(&mut self, amount: i32) {
+        self.xp += amount;
+
+        // Handle leveling up
+        while self.xp >= 100 {
+            self.xp -= 100; // Reset XP and preserve the overflow
+            self.skill_points += 1; // Award skill points
+            println!("You gained a skill point! You now have {} skill points.", self.skill_points);
+        }
+    }
+}
+
+impl Default for Player {
+    fn default() -> Self {
+        Self {
+        tech: 1,
+        arts: 1,
+        bur: 1, //short for bureaucracy
+        und: 1, //short for underworld
+        checkmate_mod: 0,
+        rocketry_mod: 0,
+        pathology_mod: 0,
+        civic_engineering_mod: 0,
+        apparatchik_mod: 0,
+        quota_mod: 0,
+        robot_mod: 0,
+        dossier_mod: 0,
+        delusion_mod: 0,
+        arts2_mod: 0,
+        arts3_mod: 0,
+        arts4_mod: 0,
+        high_proof_mod: 0,
+        prohibition_mod: 0,
+        gizmo_mod: 0,
+        oldtime_religion_mod: 0,
+        items: vec![],
+        xp: 0,
+        skill_points: 0,
+        dialogues_entered: HashSet::new(),
+        }
+    }
 }
 
 enum GameState {
     CharacterCreation,
     InGame,
     InventoryView,
+    SkillManagement,
 }
 
 #[derive(Clone)]
@@ -1395,6 +1725,7 @@ struct Dialogue {
     intro: String,
     options: Vec<DialogueOption>,
     passive_check: Vec<PassiveCheck>, // New field for passive dialogue checks
+    xp_reward: Option<i32>,
     is_hidden: bool,
 }
 
@@ -1416,6 +1747,7 @@ impl Default for Dialogue {
                 DialogueOption::default(),
             ],
             passive_check: vec![],
+            xp_reward: None,
             is_hidden: true,
         }
     }
