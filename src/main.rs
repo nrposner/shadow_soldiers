@@ -1549,6 +1549,7 @@ enum GameState {
     CharacterCreation,
     InGame,
     InventoryView,
+    SkillManagement,
 }
 
 #[derive(Clone)]
