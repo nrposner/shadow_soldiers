@@ -30,13 +30,21 @@ impl Default for DialogueApp {
             "Start".to_string(),
             Dialogue {
                 speaker: "".to_string(),
-                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
+                intro: "The front door swings shut, cutting off the bitter wind like a scythe. You stand in the harsh light of a public apartment vestibule. A grid of mailboxes wait, closed, and a grandfather clock stands stout against the wall, like an elderly servant whose crooked back can't quite stand up to attention.".to_string(),
                 options: vec![
                     DialogueOption {
                         description: "Inspect the grandfather clock.".to_string(),
                         challenge_attribute: None,
                         challenge_number: None,
                         success_dialogue: Some("InspectClock".to_string()),
+                        failure_dialogue: None,
+                        item_to_pickup: None,
+                    },
+                    DialogueOption {
+                        description: "Look in the mailboxes.".to_string(),
+                        challenge_attribute: None,
+                        challenge_number: None,
+                        success_dialogue: Some("Vestibule Mailboxes".to_string()),
                         failure_dialogue: None,
                         item_to_pickup: None,
                     },
@@ -699,7 +707,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
-                xp_reward: None,
+                xp_reward: Some(10),
                 is_hidden: true,
             }
         );
@@ -749,7 +757,7 @@ impl Default for DialogueApp {
                     },
                 ],
                 passive_check: vec![],
-                xp_reward: None,
+                xp_reward: Some(5),
                 is_hidden: true,
             }
         );
@@ -946,7 +954,29 @@ impl Default for DialogueApp {
             },
         );
 
+        let mut outdoors_dialogues = HashMap::new();
+
+        let mut second_floor_dialogues = HashMap::new();
+
+        let mut third_floor_dialogues = HashMap::new();
+
+        let mut fourth_floor_dialogues = HashMap::new();
+
+        let mut rooftop_garden_dialogues = HashMap::new();
+
+        let mut admin_room_dialogues = HashMap::new();
+
         // Define Locations
+
+        locations.insert(
+            "Outdoors".to_string(),
+            Location {
+                name: "Outdoors".to_string(),
+                dialogues: outdoors_dialogues,
+                exits: vec!["Vestibule".to_string(),]
+            }
+        );
+
         locations.insert(
             "Vestibule".to_string(),
             Location {
@@ -961,9 +991,56 @@ impl Default for DialogueApp {
             Location {
                 name: "The First Floor".to_string(),
                 dialogues: first_floor_dialogues,
-                exits: vec!["Vestibule".to_string(), "Garden".to_string()],
+                exits: vec!["Vestibule".to_string(), "SecondFloor".to_string(), "ThirdFloor".to_string(), "FourthFloor".to_string(),],
             },
         );
+
+        locations.insert(
+            "SecondFloor".to_string(),
+            Location {
+                name: "The Second Floor".to_string(),
+                dialogues: second_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "ThirdFloor".to_string(), "FourthFloor".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "ThirdFloor".to_string(),
+            Location {
+                name: "The Third Floor".to_string(),
+                dialogues: third_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "SecondFloor".to_string(), "FourthFloor".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "FourthFloor".to_string(),
+            Location {
+                name: "The Fourth Floor".to_string(),
+                dialogues: fourth_floor_dialogues,
+                exits: vec!["FirstFloor".to_string(), "SecondFloor".to_string(), "ThirdFloor".to_string(), "RooftopGarden".to_string(), "AdministratorRoom".to_string(),],
+            },
+        );
+
+        locations.insert(
+            "AdministratorRoom".to_string(),
+            Location {
+                name: "Administrator's Room".to_string(),
+                dialogues: admin_room_dialogues,
+                exits: vec!["FourthFloor".to_string()],
+            },
+        );
+
+
+        locations.insert(
+            "RooftopGarden".to_string(),
+            Location {
+                name: "Rooftop Garden".to_string(),
+                dialogues: rooftop_garden_dialogues,
+                exits: vec!["FourthFloor".to_string()],
+            },
+        );
+
 
         locations.insert(
             "Garden".to_string(),
