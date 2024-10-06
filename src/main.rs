@@ -1233,6 +1233,12 @@ impl eframe::App for DialogueApp {
                         self.previous_dialogue_id = self.current_dialogue_id.clone();
                         self.state = GameState::InventoryView;
                     }
+
+                    // Add the "Manage Skills" button
+                    if ui.button("Manage Skills").clicked() {
+                        self.previous_dialogue_id = self.current_dialogue_id.clone();
+                        self.state = GameState::SkillManagement;  // Switch to skill management state
+                    }
                 });
             }
             
