@@ -1258,6 +1258,150 @@ impl eframe::App for DialogueApp {
                     }
                 });
             }
+
+            GameState::SkillManagement => {
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    ui.heading("Skill Management");
+                    
+                    // Display available skill points
+                    ui.label(format!("Available Skill Points: {}", self.player.skill_points));
+                    
+                    // Display current skills and add buttons to increase skills
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Checkmate: {}", self.player.checkmate()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.checkmate_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Rocketry: {}", self.player.rocketry()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.rocketry_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Pathology: {}", self.player.pathology()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.pathology_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    ui.horizontal(|ui| {
+                        ui.label(format!("TECH: Civic Engineering: {}", self.player.civic_engineering()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.civic_engineering_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Delusion: {}", self.player.delusion()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.delusion_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts2: {}", self.player.arts2()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts2_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts3: {}", self.player.arts3()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts3_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("ARTS: Arts4: {}", self.player.arts4()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.arts4_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Quota: {}", self.player.quota()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.quota_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Apparatchik: {}", self.player.apparatchik()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.apparatchik_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Robot: {}", self.player.robot()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.robot_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("BUR: Dossier: {}", self.player.dossier()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.dossier_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: High Proof: {}", self.player.high_proof()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.high_proof_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Prohibition: {}", self.player.prohibition()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.prohibition_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Gizmo: {}", self.player.gizmo()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.gizmo_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+
+                    ui.horizontal(|ui| {
+                        ui.label(format!("UND: Oldtime Religion: {}", self.player.oldtime_religion()));
+                        if self.player.skill_points > 0 && ui.button("Increase").clicked() {
+                            self.player.oldtime_religion_mod += 1;
+                            self.player.skill_points -= 1;
+                        }
+                    });
+            
+                    // Add a button to return to the game
+                    if ui.button("Return to Game").clicked() {
+                        self.state = GameState::InGame;
+                    }
+                });
+            }
+            
         }
     }
 }
