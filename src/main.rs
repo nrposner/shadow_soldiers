@@ -1,4 +1,5 @@
 use eframe::{egui, Frame};
+use egui::Id;
 use rand::Rng;
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -1212,7 +1213,7 @@ impl eframe::App for DialogueApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
         match self.state {
             GameState::CharacterCreation => {
-                egui::CentralPanel::default().show(ctx, |ui| {
+                egui::SidePanel::right(Id::new("character_creation_right_panel")).show(ctx, |ui| {
                     ui.heading("Character Creation");
                     ui.label("Distribute 12 points among your four stats. Each stat must have between 1 and 6 points.");
 
@@ -1238,132 +1239,139 @@ impl eframe::App for DialogueApp {
             }
             GameState::InGame => {
                 // In-game logic here
-                egui::CentralPanel::default().show(ctx, |ui| {
-                    ui.heading("In-Game Dialogue");
+                egui::SidePanel::right(Id::new("in_game_right_panel")).min_width(400.0).max_width(400.0).show(ctx, |ui| {
+
+
+
+                    egui::Frame::default()
+                        .inner_margin(egui::style::Margin::same(50.0))  // Apply margin inside the panel
+                        .show(ui, |ui| {
+                            ui.add_space(50.0);
+                            ui.heading("In-Game Dialogue");
                     
-                    let current_dialogue_id_clone = self.current_dialogue_id.clone();
-                    let mut new_dialogue_id = None;
-                    let mut new_location_id = None;
-                    let mut options_to_remove = vec![];    // Store which options to remove
-                    let mut items_to_add = vec![];         // Store items to add to inventory after borrow ends
-                    let mut xp_reward = None;              // Store XP reward for later processing
-                    let mut passive_checks = vec![];       // Store passive checks to process later
+                            let current_dialogue_id_clone = self.current_dialogue_id.clone();
+                            let mut new_dialogue_id = None;
+                            let mut new_location_id = None;
+                            let mut options_to_remove = vec![];    // Store which options to remove
+                            let mut items_to_add = vec![];         // Store items to add to inventory after borrow ends
+                            let mut xp_reward = None;              // Store XP reward for later processing
+                            let mut passive_checks = vec![];       // Store passive checks to process later
 
-                    let mut flags_to_add = vec![]; // Store flags to add after immutable borrow ends
+                            let mut flags_to_add = vec![]; // Store flags to add after immutable borrow ends
                     
-                    if let Some(current_dialogue_id) = &current_dialogue_id_clone {
-                        // First, get the current dialogue immutably
-                        if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+                            if let Some(current_dialogue_id) = &current_dialogue_id_clone {
+                                // First, get the current dialogue immutably
+                                if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
                             
-                            // Extract the XP reward
-                            xp_reward = current_dialogue.xp_reward;
+                                    // Extract the XP reward
+                                    xp_reward = current_dialogue.xp_reward;
                             
-                            // Extract passive checks for later use
-                            passive_checks = current_dialogue.passive_check.clone();
+                                    // Extract passive checks for later use
+                                    passive_checks = current_dialogue.passive_check.clone();
                             
-                            // Display the speaker's name before the dialogue
-                            ui.heading(&format!("{} ", current_dialogue.speaker));
+                                    // Display the speaker's name before the dialogue
+                                    ui.heading(&format!("{} ", current_dialogue.speaker));
                             
-                            // Display the dialogue
-                            ui.heading(&current_dialogue.intro);
+                                    // Display the dialogue
+                                    ui.heading(&current_dialogue.intro);
                             
-                            // Iterate through the dialogue options
-                            for (i, option) in current_dialogue.options.iter().enumerate() {
+                                    // Iterate through the dialogue options
+                                    for (i, option) in current_dialogue.options.iter().enumerate() {
 
 
-                                let is_visible = match &option.visible_when {
-                                    Some(flag) => self.player.flags.contains(flag),  // Only visible if the flag is set
-                                    None => true,  // Always visible if no flag is required
-                                };
+                                        let is_visible = match &option.visible_when {
+                                            Some(flag) => self.player.flags.contains(flag),  // Only visible if the flag is set
+                                            None => true,  // Always visible if no flag is required
+                                        };
 
 
 
-                                if is_visible {
-                                    if ui.button(&option.description).clicked() {
-                                        // Clone the item to be picked up to avoid immutable borrow conflicts
-                                        if let Some(item) = &option.item_to_pickup {
-                                            items_to_add.push(item.clone());  // Add the item for later processing
-                                            options_to_remove.push(i);        // Mark this option for removal
-                                        }
+                                        if is_visible {
+                                            if ui.button(&option.description).clicked() {
+                                                // Clone the item to be picked up to avoid immutable borrow conflicts
+                                                if let Some(item) = &option.item_to_pickup {
+                                                    items_to_add.push(item.clone());  // Add the item for later processing
+                                                    options_to_remove.push(i);        // Mark this option for removal
+                                                }
 
-                                        if let Some(flags) = &option.flags {
-                                            for flag in flags {
-                                                flags_to_add.push(flag.clone());  // Collect flags to add later
-                                            }
-                                        }
+                                                if let Some(flags) = &option.flags {
+                                                    for flag in flags {
+                                                        flags_to_add.push(flag.clone());  // Collect flags to add later
+                                                    }
+                                                }
             
-                                        // Handle challenges and dialogue transitions
-                                        if option.challenge_number.is_some() {
-                                            let success = handle_challenge(&self.player, option);
-                                            if success {
-                                                new_dialogue_id = option.success_dialogue.clone();
-                                            } else {
-                                                new_dialogue_id = option.failure_dialogue.clone();
+                                                // Handle challenges and dialogue transitions
+                                                if option.challenge_number.is_some() {
+                                                    let success = handle_challenge(&self.player, option);
+                                                    if success {
+                                                        new_dialogue_id = option.success_dialogue.clone();
+                                                    } else {
+                                                        new_dialogue_id = option.failure_dialogue.clone();
+                                                    }
+                                                } else if let Some(success_dialogue) = &option.success_dialogue {
+                                                    // Handle transition to a new location or dialogue
+                                                    if self.locations.contains_key(success_dialogue) {
+                                                        new_location_id = Some(success_dialogue.clone());
+                                                        new_dialogue_id = None;
+                                                    } else {
+                                                        new_dialogue_id = Some(success_dialogue.clone());
+                                                    }
+                                                }
                                             }
-                                        } else if let Some(success_dialogue) = &option.success_dialogue {
-                                            // Handle transition to a new location or dialogue
-                                            if self.locations.contains_key(success_dialogue) {
-                                                new_location_id = Some(success_dialogue.clone());
-                                                new_dialogue_id = None;
-                                            } else {
-                                                new_dialogue_id = Some(success_dialogue.clone());
-                                            }
+                                        }
+                                    } 
+
+                                    // Now that the immutable borrow has ended, we can safely add the flags to the player's flags
+                                    for flag in flags_to_add {
+                                        self.player.flags.insert(flag);  // Add each flag to the player's flags
+                                    }
+
+                                    // Now that the immutable borrow of `current_dialogue` has ended, we can safely mutate `self.player`
+                            
+                                    // Add items to inventory
+                                    for item in items_to_add {
+                                        self.player.items.push(item);
+                                    }
+                            
+                                    // Remove options that have been interacted with
+                                    if !options_to_remove.is_empty() {
+                                        let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
+                                        for &index in options_to_remove.iter().rev() {
+                                            dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
                                         }
                                     }
-                                }
-                            }
-
-                            // Now that the immutable borrow has ended, we can safely add the flags to the player's flags
-                            for flag in flags_to_add {
-                                self.player.flags.insert(flag);  // Add each flag to the player's flags
-                            }
-
-                            // Now that the immutable borrow of `current_dialogue` has ended, we can safely mutate `self.player`
                             
-                            // Add items to inventory
-                            for item in items_to_add {
-                                self.player.items.push(item);
-                            }
-                            
-                            // Remove options that have been interacted with
-                            if !options_to_remove.is_empty() {
-                                let dialogue = self.get_current_dialogue_from_id_mut(current_dialogue_id).unwrap();
-                                for &index in options_to_remove.iter().rev() {
-                                    dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
-                                }
-                            }
-                            
-                            // Award XP if this is the first time entering the dialogue
-                            if !self.player.dialogues_entered.contains(current_dialogue_id) {
-                                if let Some(xp_amount) = xp_reward {
-                                    self.player.add_xp(xp_amount);
-                                    println!("You gained {} XP!", xp_amount);
-                                }
-                                // Mark the dialogue as entered
-                                self.player.dialogues_entered.insert(current_dialogue_id.clone());
-                            }
+                                    // Award XP if this is the first time entering the dialogue
+                                    if !self.player.dialogues_entered.contains(current_dialogue_id) {
+                                        if let Some(xp_amount) = xp_reward {
+                                            self.player.add_xp(xp_amount);
+                                            println!("You gained {} XP!", xp_amount);
+                                        }
+                                        // Mark the dialogue as entered
+                                        self.player.dialogues_entered.insert(current_dialogue_id.clone());
+                                    }
             
-                            // Handle passive checks
-                            for passive_check in passive_checks {
-                                let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;  // Assume some modifier for skill checks
-                                let success = player_skill_value >= passive_check.target;
+                                    // Handle passive checks
+                                    for passive_check in passive_checks {
+                                        let player_skill_value = self.get_player_skill(&passive_check.skill) + 6;  // Assume some modifier for skill checks
+                                        let success = player_skill_value >= passive_check.target;
                                 
-                                if success {
-                                    if let Some(success_text) = &passive_check.success_text {
-                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
-                                        ui.label(success_text);
-                                    }
-                                } else {
-                                    if let Some(failure_text) = &passive_check.failure_text {
-                                        ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
-                                        ui.label(failure_text);
+                                        if success {
+                                            if let Some(success_text) = &passive_check.success_text {
+                                                ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                                ui.label(success_text);
+                                            }
+                                        } else {
+                                            if let Some(failure_text) = &passive_check.failure_text {
+                                                ui.heading(&format!("{} says:", passive_check.speaker.clone().unwrap_or("Narrator".to_string())));
+                                                ui.label(failure_text);
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        }
-                    }
-            
-                    // Handle dialogue or location transition
+
+                            // Handle dialogue or location transition
                     if let Some(new_id) = new_dialogue_id {
                         self.current_dialogue_id = Some(new_id);
                     }
@@ -1382,6 +1390,9 @@ impl eframe::App for DialogueApp {
                         self.previous_dialogue_id = self.current_dialogue_id.clone();
                         self.state = GameState::SkillManagement;  // Switch to skill management state
                     }
+
+                        });
+
                 });
             }
             
@@ -1909,7 +1920,9 @@ impl Default for Dialogue {
 
 fn main() {
     let app = DialogueApp::default();
-    let native_options = eframe::NativeOptions::default();
+    let mut native_options = eframe::NativeOptions::default();
+    native_options.fullscreen = true; 
+
     eframe::run_native(
         "Dialogue System",  // App name
         native_options,     // Window options
