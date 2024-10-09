@@ -1072,17 +1072,17 @@ impl Default for DialogueApp {
             },
         );
 
-        let mut outdoors_dialogues = HashMap::new();
+        let outdoors_dialogues = HashMap::new();
 
-        let mut second_floor_dialogues = HashMap::new();
+        let second_floor_dialogues = HashMap::new();
 
-        let mut third_floor_dialogues = HashMap::new();
+        let third_floor_dialogues = HashMap::new();
 
-        let mut fourth_floor_dialogues = HashMap::new();
+        let fourth_floor_dialogues = HashMap::new();
 
-        let mut rooftop_garden_dialogues = HashMap::new();
+        let rooftop_garden_dialogues = HashMap::new();
 
-        let mut admin_room_dialogues = HashMap::new();
+        let admin_room_dialogues = HashMap::new();
 
         // Define Locations
 
