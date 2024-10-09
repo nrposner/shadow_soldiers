@@ -1238,6 +1238,11 @@ impl eframe::App for DialogueApp {
                 });
             }
             GameState::InGame => {
+
+                let mut style = (*ctx.style()).clone();
+                style.spacing.button_padding = egui::Vec2::new(15.0, 5.0);
+                ctx.set_style(style);
+
                 // In-game logic here
                 egui::SidePanel::right(Id::new("in_game_right_panel")).min_width(400.0).max_width(400.0).show(ctx, |ui| {
 
@@ -1248,6 +1253,7 @@ impl eframe::App for DialogueApp {
                         .show(ui, |ui| {
                             ui.add_space(50.0);
                             ui.heading("In-Game Dialogue");
+                            ui.add_space(20.0);
                     
                             let current_dialogue_id_clone = self.current_dialogue_id.clone();
                             let mut new_dialogue_id = None;
@@ -1268,23 +1274,24 @@ impl eframe::App for DialogueApp {
                             
                                     // Extract passive checks for later use
                                     passive_checks = current_dialogue.passive_check.clone();
-                            
-                                    // Display the speaker's name before the dialogue
-                                    ui.heading(&format!("{} ", current_dialogue.speaker));
-                            
+
+                                    ui.label(egui::RichText::new(format!("{}", current_dialogue.speaker)).strong().size(24.0));
+
+                                    ui.add_space(20.0);
+
                                     // Display the dialogue
-                                    ui.heading(&current_dialogue.intro);
+                                    // ui.heading(&current_dialogue.intro);
+                                    ui.label(egui::RichText::new(format!("{}", &current_dialogue.intro)).size(20.0));
+
+                                    ui.add_space(20.0);
                             
                                     // Iterate through the dialogue options
                                     for (i, option) in current_dialogue.options.iter().enumerate() {
-
 
                                         let is_visible = match &option.visible_when {
                                             Some(flag) => self.player.flags.contains(flag),  // Only visible if the flag is set
                                             None => true,  // Always visible if no flag is required
                                         };
-
-
 
                                         if is_visible {
                                             if ui.button(&option.description).clicked() {
@@ -1378,12 +1385,16 @@ impl eframe::App for DialogueApp {
                     if let Some(new_location) = new_location_id {
                         self.current_location_id = new_location;
                     }
+
+                    ui.add_space(20.0);
             
                     // Add the "View Inventory" button
                     if ui.button("View Inventory").clicked() {
                         self.previous_dialogue_id = self.current_dialogue_id.clone();
                         self.state = GameState::InventoryView;
                     }
+
+                    ui.add_space(20.0);
 
                     // Add the "Manage Skills" button
                     if ui.button("Manage Skills").clicked() {
