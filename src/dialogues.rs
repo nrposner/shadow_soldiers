@@ -118,38 +118,22 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Inspect the grandfather clock.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("InspectClock".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
                 DialogueOption {
                     description: "Look in the mailboxes.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
-                    success_dialogue: Some("Vestibule Mailboxes".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    success_dialogue: Some("VestibuleMailboxes".to_string()),
+                    ..Default::default()
                 },
                 DialogueOption {
                     description: "Go to the first floor.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("FirstFloor".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
             is_hidden: false,
+            ..Default::default()
         },
     );
 
@@ -165,9 +149,7 @@ pub fn create_locations() -> HashMap<String, Location> {
                     challenge_number: Some(12),
                     success_dialogue: Some("HungryClock".to_string()), 
                     failure_dialogue: Some("MockingClock".to_string()),
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
 
                     // hungry for the gear? it wants to eat its beating heart. Can give you a hint of where to find it
                 },
@@ -176,24 +158,14 @@ pub fn create_locations() -> HashMap<String, Location> {
 
                 DialogueOption {
                     description: "Check the time.".to_string(), 
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("BrokenClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Goodbye, fair clock. (End conversation).".to_string(), 
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
             passive_check: vec![
@@ -213,8 +185,7 @@ pub fn create_locations() -> HashMap<String, Location> {
                     speaker: Some("Gizmo".to_string())
                 },
             ],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         },
     );
 
@@ -226,18 +197,11 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -249,51 +213,29 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "What a waste. Surely I could fix it up?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockRecommends".to_string()), //gizmo to fix it, or telling you to open it up to do so
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Five-thirty-seven in the morning or night?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockFutile".to_string()), //futilely ask if this is morning or night
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Stand proud, fallen soldier of the Republic! (Salute the clock)".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockSalute".to_string()), //salute it
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Goodbye, mysterious clock.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), //exit
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -318,9 +260,7 @@ pub fn create_locations() -> HashMap<String, Location> {
                     challenge_number: Some(6),
                     success_dialogue: Some("ClockPlane".to_string()),
                     failure_dialogue: Some("ClockPlaneFail".to_string()),
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
@@ -329,25 +269,16 @@ pub fn create_locations() -> HashMap<String, Location> {
                     challenge_number: Some(12),
                     success_dialogue: Some("ClockMissingGear".to_string()),
                     failure_dialogue: Some("ClockFixImpossible".to_string()),
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Close the casing.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("InspectClock".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -359,29 +290,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Okay, that's just, like, your opinion, man. (End conversation)".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Tell me your secrets!".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockDecline".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -393,29 +312,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Well, alright then.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Fuck you, and your little cuckoo too.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -427,40 +334,23 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "On second thought, let's not do that.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("BrokenClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Come on, why did you have to phrase it that way?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockPhrasing".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Let's do this.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -472,62 +362,35 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Like I'm doing something creepy here! It's just a broken clock.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("JustABrokenClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Like this is some *religious* thing. That's not what I'm about.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ReligiousClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Like... you know.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockSuggestive".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "You know what, never mind.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("BrokenClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Fine, I'll get *into its guts*. What's in there?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -539,29 +402,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Well, Grandfather Clockovitch here can languish a little longer.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("BrokenClock".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Fine, I'll look inside. As long as there's no more creepy phrasing.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -573,18 +424,12 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true, //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
+            //grandfather clockovitch is a secret religionist! asks that you forgive him anyway. Will you hold back your generosity from this sinne- I mean, reactionary?
+            ..Default::default()
         }
     );
 
@@ -596,29 +441,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Like it's something... sexual.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockSexual".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Fine, I'll leave off. What was that about a sun and moon again?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("BrokenClock".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -634,36 +467,22 @@ pub fn create_locations() -> HashMap<String, Location> {
                     challenge_number: Some(8),
                     success_dialogue: Some("ClockPerversion".to_string()), //Pathology check to justify yourself
                     failure_dialogue: Some("ClockTrauma".to_string()),
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "There it is again! You're putting this weird *emphasis* on things.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockEmphasis".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Actually, you know what? This isn't a sexual thing, it's a religious thing.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockSexualReligion".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -675,29 +494,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Let's go with that.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockCIA".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "No, you can't possibly be serious. How can that possibly make sense?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockExplanation".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -709,29 +516,17 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "What, seriously?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockNotTrauma".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "Did I have to do... that... during The War? Do I have repressed memories I need to process?".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockRepression".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -743,18 +538,11 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -766,18 +554,11 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -789,18 +570,11 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()),
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -826,40 +600,23 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "You know, somehow that fails to make me okay with all of this.".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "If this is what communism has come to, shave my mustache and call me Milton Friedman. (Leave in disgust)".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), 
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -871,18 +628,12 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
             xp_reward: Some(10),
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -894,18 +645,11 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("Start".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -917,28 +661,18 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Pick it up".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), 
-                    failure_dialogue: None,
                     item_to_pickup: Some("Sukhoi SU-25 Grach model".to_string()),
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
                 DialogueOption {
                     description: "It's only a model (Return)".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
             xp_reward: Some(5),
-            is_hidden: true,
+            ..Default::default()
         }
     );
 
@@ -952,29 +686,581 @@ pub fn create_locations() -> HashMap<String, Location> {
             options: vec![
                 DialogueOption {
                     description: "Pick it up".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
                     item_to_pickup: Some("Toy Plane".to_string()),
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
 
                 DialogueOption {
                     description: "(Return)".to_string(),
-                    challenge_attribute: None,
-                    challenge_number: None,
                     success_dialogue: Some("ClockInterior".to_string()), // Go back to the room's main dialogue
-                    failure_dialogue: None,
-                    item_to_pickup: None,
-                    visible_when: None,
-                    flags: None,
+                    ..Default::default()
                 },
             ],
-            passive_check: vec![],
-            xp_reward: None,
-            is_hidden: true,
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "VestibuleMailboxes".to_string(),
+        Dialogue{
+            speaker: "Mailboxes".to_string(),
+            intro: "Four rows of square, wooden mailboxes sit above a dusty bar mounted to the wall.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Examine the mailboxes".to_string(),
+                    success_dialogue: Some("MailboxExamination".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Look at the first row".to_string(),
+                    success_dialogue: Some("MailboxFirstRow".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Look at the second row".to_string(),
+                    success_dialogue: Some("MailboxSecondRow".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Look at the third row".to_string(),
+                    success_dialogue: Some("MailboxThirdRow".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Look at the fourth row".to_string(),
+                    success_dialogue: Some("MailboxFourthRow".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Exit".to_string(),
+                    success_dialogue: Some("Start".to_string()),
+                    ..Default::default()
+                },
+            ],
+            passive_check: vec![
+                PassiveCheck {
+                    skill: "dossier".to_string(),
+                    target: 8,
+                    success_text: Some("The first mailbox in the fourth row, number 400, just reads 'Administrator.' This one's yours.".to_string()),
+                    failure_text: None,
+                    speaker: Some("Dossier".to_string())
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "MailboxFirstRow".to_string(),
+        Dialogue {
+            speaker: "Mailboxes".to_string(),
+            intro: "".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Open 106: Kutuzov".to_string(),
+                    success_dialogue: Some("Mailbox106".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 108: ".to_string(),
+                    success_dialogue: Some("Mailbox108".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("VestibuleMailboxes".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "MailboxSecondRow".to_string(),
+        Dialogue {
+            speaker: "Mailboxes".to_string(),
+            intro: "".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Open 201: ".to_string(),
+                    success_dialogue: Some("Mailbox201".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 205: ".to_string(),
+                    success_dialogue: Some("Mailbox205".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 206: ".to_string(),
+                    success_dialogue: Some("Mailbox206".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 208: ".to_string(),
+                    success_dialogue: Some("Mailbox208".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("VestibuleMailboxes".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "MailboxThirdRow".to_string(),
+        Dialogue {
+            speaker: "Mailboxes".to_string(),
+            intro: "".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Open 301: ".to_string(),
+                    success_dialogue: Some("Mailbox301".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 303: ".to_string(),
+                    success_dialogue: Some("Mailbox303".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 304: ".to_string(),
+                    success_dialogue: Some("Mailbox304".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 305: ".to_string(),
+                    success_dialogue: Some("Mailbox305".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Open 307: ".to_string(),
+                    success_dialogue: Some("Mailbox307".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("VestibuleMailboxes".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "MailboxFourthRow".to_string(),
+        Dialogue {
+            speaker: "Mailboxes".to_string(),
+            intro: "The lone nameplate reads: Administrator. It's clean, free of dust, and undamaged.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Open 400: Administrator".to_string(),
+                    success_dialogue: Some("Mailbox400".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("VestibuleMailboxes".to_string()),
+                    ..Default::default()
+                },
+
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "MailboxExamination".to_string(),
+        Dialogue{
+            speaker: "Mailboxes".to_string(),
+            intro: "Most have no nameplate at all. Maybe a dozen or so apartments are actually assigned. Most of those are empty too.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "".to_string(),
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                },
+            ],
+            passive_check: vec![
+                PassiveCheck {
+                    skill: "robot".to_string(),
+                    target: 0,
+                    success_text: Some("Good. The people here are dutiful. They collect their mail on time.".to_string()),
+                    failure_text: None,
+                    speaker: Some("Robot".to_string())
+                },
+
+                PassiveCheck {
+                    skill: "delusion".to_string(),
+                    target: 10,
+                    success_text: Some("Unlikely. These mailboxes are sad. Lonely. Touch-starved.".to_string()),
+                    failure_text: None,
+                    speaker: Some("Delusion".to_string())
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox106".to_string(),
+        Dialogue{
+            speaker: "Mailboxes".to_string(),
+            intro: "This mailbox's cover is hanging off its hinge. The nameplate, Kutuzov, is slightly bent.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "".to_string(),
+                    success_dialogue: Some("Mailbox106Part2".to_string()),
+                    ..Default::default()
+                },
+            ],
+            passive_check: vec![
+                PassiveCheck {
+                    skill: "gunsmoke".to_string(),
+                    target: 10,
+                    success_text: Some("Psh, what a pussy. A real man could knock the cover clean off. Establish dominance. Punch his mailbox *harder*.".to_string()),
+                    failure_text: Some("Oh yeah, this Kutuzov fellow is a four-star badass. It takes a real man to punch his own mailbox.".to_string()),
+                    speaker: Some("Gunsmoke".to_string()),
+                },
+                PassiveCheck {
+                    skill: "pathology".to_string(),
+                    target: 10,
+                    success_text: Some("This 'Kutuzov' suffers from a condition in which he gives human qualities to inanimate objects. I'm sure you can't relate".to_string()),
+                    failure_text: Some("It takes a real man to punch *someone else's* mailbox. Punching your own is just pathetic.".to_string()),
+                    speaker: Some("Pathology".to_string()),
+                },
+                PassiveCheck {
+                    skill: "transcendence".to_string(),
+                    target: 10,
+                    success_text: Some("This is *not* the New Soviet Man. Or Woman.".to_string()),
+                    failure_text: Some("Why are we assuming Kutuzov is a man? Women can annihilate state property too.".to_string()),
+                    speaker: Some("Transcendence".to_string()),
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox106Part2".to_string(),
+        Dialogue{
+            speaker: "Mailboxes".to_string(),
+            intro: "Ahem. As I was saying, the box is stuffed with official notices and bills. One of them sticks out: an empty, ripped-open court notice.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Punch it *harder*.".to_string(),
+                    //gunsmoke check, failure you lose health, break your wrist
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                }, // this option should become available if the gunsmoke 
+                // or should it?
+                DialogueOption {
+                    description: "I'm not doing that.".to_string(),
+                    success_dialogue: Some("MailboxFirstRow".to_string()),
+                    ..Default::default()
+                },
+            ],
+            passive_check: vec![
+                PassiveCheck {
+                    skill: "dossier".to_string(),
+                    target: 10,
+                    success_text: Some("These envelopes carry three kinds of notices: Fines, Summons, and Divorces. Take your bets.".to_string()),
+                    failure_text: None,
+                    speaker: Some("Dossier".to_string()),
+                },   
+            ],
+            ..Default::default()
+        }
+    );
+
+    //kutuzov is loud and violent, nobody likes him, 108 remains only because they can't leave or somehow don't midn
+    //106 is beaten up, slammed, punched
+
+    vestibule_dialogues.insert(
+        "Mailbox400".to_string(),
+        Dialogue{
+            speaker: "Mailboxes".to_string(),
+            intro: "There's just one envelope, crisp and clean, lying on the bottom. The writing on the front reads 'Apologies'.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Whose writing?. (Dossier 10)".to_string(),
+                    challenge_attribute: Some("dossier".to_string()),
+                    challenge_number: Some(10),
+                    success_dialogue: Some("Mailbox400LetterSuccess".to_string()),
+                    failure_dialogue: Some("Mailbox400LetterFailure".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Take the letter".to_string(),
+                    success_dialogue: Some("MailboxFourthRow".to_string()),
+                    item_to_pickup: Some("Administrator's letter".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterSuccess".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "Neat, disciplined, orderly handwriting. Professional. From a hand that kills.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "The plot thickens!".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Cut the drama. What else can I tell?".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterFailure".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "This is really nice handwriting. Precise. It just screams 'competence'. Whoever wrote this was clearly...".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "A politician.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "A scientist.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "A bureaucrat.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "An artist.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "How should I know?".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPen".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterPen".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "The pen almost runs out of ink just as he finishes: the dark, confident line sputters out. It left a curling imprint on the paper, a ghostly line where no ink filled in.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Continue".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPenQuestions".to_string()),
+                    ..Default::default()
+                },
+            ],
+            passive_check: vec![
+                PassiveCheck {
+                    skill: "checkmate".to_string(),
+                    target: 10,
+                    success_text: Some("He was in a rush, but wanted to hide it. Someone with a hand this meticulous would have switched to a new cartridge otherwise.".to_string()),
+                    failure_text: Some("It means he was using his pen a lot. Makes sense for someone with really nice handwriting to use a pen a lot.".to_string()),
+                    speaker: Some("Checkmate".to_string())
+                },
+            ] ,
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterPenQuestions".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "The letter waits in the mailbox.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Anything else? At all? (Oldtime Religion 8)".to_string(),
+                    challenge_attribute: Some("oldtime_religion".to_string()),
+                    challenge_number: Some(8),
+                    success_dialogue: Some("Mailbox400LetterAnythingSuccess".to_string()),
+                    failure_dialogue: Some("Mailbox400LetterAnythingFailure".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Shake the envelope.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterListen".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Sniff the envelope.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterSmell".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Taste the envelope.".to_string(),
+                    success_dialogue: Some("Mailbox400LetterTaste".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Enough of this.".to_string(),
+                    success_dialogue: Some("Mailbox400".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterAnythingSuccess".to_string(),
+        Dialogue{
+            speaker: "Oldtime Religion".to_string(),
+            intro: "He was religious.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Egads! The opiate of the masses? In *my* socialist republic?".to_string(),
+                    success_dialogue: Some("LetterReligious".to_string()),
+                    ..Default::default()
+                },
+                DialogueOption {
+                    description: "Seriously? How could I possibly know that?".to_string(),
+                    success_dialogue: Some("LetterReligious".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterListen".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "The envelope is thin, without overt bulging. But the dull jangle of metal sounds inside. A key, probably.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "But I already have a key.".to_string(),
+                    success_dialogue: Some("LetterKeyAlready".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterSmell".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "It smells like stale sweat and candle smoke. It probably sat on someone's desk for a long time. He might have been saving it.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPenQuestions".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "Mailbox400LetterTaste".to_string(),
+        Dialogue{
+            speaker: "Crisp Letter".to_string(),
+            intro: "It tastes like paper. I don't know what you expected.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Return".to_string(),
+                    success_dialogue: Some("Mailbox400LetterPenQuestions".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "LetterReligious".to_string(),
+        Dialogue{
+            speaker: "Oldtime Religion".to_string(),
+            intro: "It's more likely than you think. You can see it in how the 'g' curls: a decadent, calligraphic flourish that comes out of the handwriting methods taught before the Revolution. Some reactionary groups, especially those aligned with the Orthodox church, pick it up from copying church documents.".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "Case closed!".to_string(),
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                }, // what case, you're not a detective
+                DialogueOption {
+                    description: "But, to be clear, calligraphy doesn't actually imply anything about the writer's beliefs regarding God, the church, or anything else, right?".to_string(),
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+    vestibule_dialogues.insert(
+        "".to_string(),
+        Dialogue{
+            speaker: "".to_string(),
+            intro: "".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "".to_string(),
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
+        }
+    );
+
+
+
+    //mess with people's mail, most empty
+    // box numbers
+    // your own, a letter from the last guy, a key too??? but not the key to the front door
+
+
+
+    //in the admin room, a calendar? learn about time, historical events, and the last guy's personality
+
+
+    // default-enabled version, nice and compact
+    // remember to make is_hidden false if this is an entry point!!
+    vestibule_dialogues.insert(
+        "".to_string(),
+        Dialogue{
+            speaker: "".to_string(),
+            intro: "".to_string(),
+            options: vec![
+                DialogueOption {
+                    description: "".to_string(),
+                    success_dialogue: Some("".to_string()),
+                    ..Default::default()
+                },
+            ],
+            ..Default::default()
         }
     );
 
@@ -1003,6 +1289,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             is_hidden: true,
         }
     );
+
 
 
     // Define sample dialogues for the First Floor
