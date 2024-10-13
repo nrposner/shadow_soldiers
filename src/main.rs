@@ -7,6 +7,69 @@ use std::collections::HashSet;
 mod dialogues;
 use dialogues::{create_locations, Location, Dialogue, DialogueOption, PassiveCheck};
 
+#[derive(Debug)]
+#[derive(PartialEq)]
+struct Time {
+    day: i32,
+    hour: i32,
+    minute: i32,
+}
+
+impl Time {
+    fn increase(&mut self, added_minutes: i32) {
+        let days_increased: i32 = added_minutes/1440;
+
+        let hours_increased: i32 = (added_minutes - 1440*days_increased)/60;
+
+        let minutes_increased: i32 = (added_minutes - 1440*days_increased) - (60*hours_increased);
+
+        self.day += days_increased;
+        self.hour += hours_increased;
+        self.minute += minutes_increased;
+
+        if self.minute > 59 {
+            self.minute = self.minute%60;
+            self.hour += 1;
+        } 
+
+        if self.hour > 23 {
+            self.hour = 0;
+            self.day +=1;
+        };
+
+
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn time_test() {
+
+        let mut x = Time {
+            day: 3,
+            hour: 8,
+            minute: 56
+        };
+
+        x.increase(675);
+
+        assert_eq!(x, Time {
+            day: 3,
+            hour: 20,
+            minute: 11,
+
+            //11 hours 15, which should roll over
+            //so day 3, hour 20, minute 11
+        });
+    }
+}
+
+
+
+
 struct DialogueApp {
     current_text: String,
     player: Player,
@@ -15,6 +78,7 @@ struct DialogueApp {
     current_dialogue_id: Option<String>,  // Current dialogue ID, or None if not in a dialogue
     state: GameState,
     previous_dialogue_id: Option<String>,
+    current_time: Time, 
 }
 
 impl Default for DialogueApp {
@@ -39,7 +103,7 @@ impl Default for DialogueApp {
                 arts2_mod: 0,
                 arts3_mod: 0,
                 arts4_mod: 0,
-                high_proof_mod: 0,
+                gunsmoke_mod: 0,
                 prohibition_mod: 0,
                 gizmo_mod: 0,
                 oldtime_religion_mod: 0,
@@ -54,12 +118,18 @@ impl Default for DialogueApp {
             current_dialogue_id: Some("Start".to_string()), // Start with the "Start" dialogue
             state: GameState::CharacterCreation, 
             previous_dialogue_id: None,
+            current_time: Time {
+                day: 1,
+                hour: 3,
+                minute: 30,
+            }
         }
     }
 }
 
 
 impl eframe::App for DialogueApp {
+
     fn update(&mut self, ctx: &egui::Context, _frame: &mut Frame) {
         match self.state {
             GameState::CharacterCreation => {
@@ -96,8 +166,6 @@ impl eframe::App for DialogueApp {
                 // In-game logic here
                 egui::SidePanel::right(Id::new("in_game_right_panel")).min_width(400.0).max_width(400.0).show(ctx, |ui| {
 
-
-
                     egui::Frame::default()
                         .inner_margin(egui::style::Margin::same(50.0))  // Apply margin inside the panel
                         .show(ui, |ui| {
@@ -118,6 +186,9 @@ impl eframe::App for DialogueApp {
                             if let Some(current_dialogue_id) = &current_dialogue_id_clone {
                                 // First, get the current dialogue immutably
                                 if let Some(current_dialogue) = self.get_current_dialogue_from_id(current_dialogue_id) {
+
+                                    // Extract time
+                                    let time_forward = current_dialogue.time;
                             
                                     // Extract the XP reward
                                     xp_reward = current_dialogue.xp_reward;
@@ -131,9 +202,11 @@ impl eframe::App for DialogueApp {
 
                                     // Display the dialogue
                                     // ui.heading(&current_dialogue.intro);
+                                    
                                     ui.label(egui::RichText::new(format!("{}", &current_dialogue.intro)).size(20.0));
 
                                     ui.add_space(20.0);
+
                             
                                     // Iterate through the dialogue options
                                     for (i, option) in current_dialogue.options.iter().enumerate() {
@@ -197,6 +270,8 @@ impl eframe::App for DialogueApp {
                                             dialogue.options.remove(index);  // Remove the option in reverse order to avoid shifting indices
                                         }
                                     }
+
+
                             
                                     // Award XP if this is the first time entering the dialogue
                                     if !self.player.dialogues_entered.contains(current_dialogue_id) {
@@ -230,7 +305,14 @@ impl eframe::App for DialogueApp {
 
                             // Handle dialogue or location transition
                     if let Some(new_id) = new_dialogue_id {
-                        self.current_dialogue_id = Some(new_id);
+                        self.current_dialogue_id = Some(new_id.clone());
+
+                        // Now we handle updating time only when a new dialogue is entered
+                        if let Some(new_dialogue) = self.get_current_dialogue_from_id(&new_id) {
+                            if let Some(time_forward) = new_dialogue.time {
+                                self.current_time.increase(time_forward);  // Move time forward only on dialogue change
+                            }
+                        }
                     }
                     if let Some(new_location) = new_location_id {
                         self.current_location_id = new_location;
@@ -251,6 +333,13 @@ impl eframe::App for DialogueApp {
                         self.previous_dialogue_id = self.current_dialogue_id.clone();
                         self.state = GameState::SkillManagement;  // Switch to skill management state
                     }
+
+                    //add Time counter
+
+                    ui.add_space(20.0);
+
+                    ui.label(egui::RichText::new(format!("Day {}, {}:{}", self.current_time.day, self.current_time.hour, self.current_time.minute)).strong().size(24.0));
+
 
                         });
 
@@ -379,9 +468,9 @@ impl eframe::App for DialogueApp {
                     });
 
                     ui.horizontal(|ui| {
-                        ui.label(format!("UND: High Proof: {}", self.player.high_proof()));
+                        ui.label(format!("UND: Gunsmoke: {}", self.player.gunsmoke()));
                         if self.player.skill_points > 0 && ui.button("Increase").clicked() {
-                            self.player.high_proof_mod += 1;
+                            self.player.gunsmoke_mod += 1;
                             self.player.skill_points -= 1;
                         }
                     });
@@ -494,7 +583,7 @@ impl DialogueApp {
             "arts2" => self.player.arts2(),
             "arts3" => self.player.arts3(),
             "arts4" => self.player.arts4(),
-            "high proof" => self.player.high_proof(),
+            "gunsmoke" => self.player.gunsmoke(),
             "prohibition" => self.player.prohibition(),
             "gizmo" => self.player.gizmo(),
             "oldtime religion" => self.player.oldtime_religion(),
@@ -520,7 +609,7 @@ fn handle_challenge(player: &Player, option: &DialogueOption) -> bool {
                 "arts2" => player.arts2(),
                 "arts3" => player.arts3(),
                 "arts4" => player.arts4(),
-                "high proof" => player.high_proof(),
+                "gunsmoke" => player.gunsmoke(),
                 "prohibition" => player.prohibition(),
                 "gizmo" => player.gizmo(),
                 "oldtime religion" => player.oldtime_religion(),
@@ -575,7 +664,7 @@ struct Player {
     arts2_mod: i32,
     arts3_mod: i32,
     arts4_mod: i32,
-    high_proof_mod: i32,
+    gunsmoke_mod: i32,
     prohibition_mod: i32,
     gizmo_mod: i32,
     oldtime_religion_mod: i32,
@@ -635,8 +724,8 @@ impl Player {
         self.arts + self.arts4_mod
     }
 
-    fn high_proof(&self) -> i32 {
-        self.und + self.high_proof_mod
+    fn gunsmoke(&self) -> i32 {
+        self.und + self.gunsmoke_mod
     }
 
     fn prohibition(&self) -> i32 {
@@ -696,7 +785,7 @@ impl Default for Player {
         arts2_mod: 0,
         arts3_mod: 0,
         arts4_mod: 0,
-        high_proof_mod: 0,
+        gunsmoke_mod: 0,
         prohibition_mod: 0,
         gizmo_mod: 0,
         oldtime_religion_mod: 0,
