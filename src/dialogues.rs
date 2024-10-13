@@ -28,6 +28,7 @@ pub struct Dialogue {
     pub passive_check: Vec<PassiveCheck>, // New field for passive dialogue checks
     pub xp_reward: Option<i32>,
     pub is_hidden: bool,
+    pub time: Option<i32>,
 }
 
 #[derive(Clone)]
@@ -65,6 +66,7 @@ impl Default for Dialogue {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: true,
+            time: Some(1),
         }
     }
 }
@@ -1287,6 +1289,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: true,
+            time: Some(1),
         }
     );
 
@@ -1334,6 +1337,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: false,
+            time: Some(1),
         },
     );
 
@@ -1358,6 +1362,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: false,
+            time: Some(1),
         },
     );
 
@@ -1381,6 +1386,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: false,
+            time: Some(1),
         },
     );
 
@@ -1416,6 +1422,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: false,
+            time: Some(1)
         },
     );
 
@@ -1440,6 +1447,7 @@ pub fn create_locations() -> HashMap<String, Location> {
             passive_check: vec![],
             xp_reward: None,
             is_hidden: false,
+            time: Some(1),
         },
     );
 
