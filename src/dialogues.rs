@@ -568,7 +568,7 @@ pub fn create_locations() -> HashMap<String, Location> {
         "ClockCIA".to_string(),
         Dialogue {
             speaker: "Grandfather Clock".to_string(),
-            intro: "".to_string(),
+            intro: "No need for an explanation, seeing as we're all on the same page.".to_string(),
             options: vec![
                 DialogueOption {
                     description: "".to_string(),

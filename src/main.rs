@@ -67,9 +67,6 @@ mod tests {
     }
 }
 
-
-
-
 struct DialogueApp {
     current_text: String,
     player: Player,
