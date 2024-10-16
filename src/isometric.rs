@@ -70,8 +70,8 @@ impl IsometricSpace {
         let row = start_row as f32 * (1.0 - self.player_anim_progress) + end_row as f32 * self.player_anim_progress;
         let col = start_col as f32 * (1.0 - self.player_anim_progress) + end_col as f32 * self.player_anim_progress;
 
-        let x = (col - row) * (self.tile_size.0 / 2.0);
-        let y = (col + row) * (self.tile_size.1 / 2.0);
+        let x = (col - row - 1.0) * (self.tile_size.0 / 2.0);
+        let y = (col + row - 1.0) * (self.tile_size.1 / 2.0);
 
         let player_rect = egui::Rect::from_min_size(
             egui::pos2(x + self.tile_size.0 / 4.0, y + self.tile_size.1 / 4.0),

@@ -6,6 +6,8 @@ use std::collections::HashSet;
 
 mod dialogues;
 use dialogues::{create_locations, Location, Dialogue, DialogueOption, PassiveCheck};
+mod isometric;
+use isometric::{IsometricSpace};
 
 #[derive(Debug)]
 #[derive(PartialEq)]
@@ -76,6 +78,7 @@ struct DialogueApp {
     state: GameState,
     previous_dialogue_id: Option<String>,
     current_time: Time, 
+    isometric_space: IsometricSpace, 
 }
 
 impl Default for DialogueApp {
@@ -119,6 +122,9 @@ impl Default for DialogueApp {
                 day: 1,
                 hour: 3,
                 minute: 30,
+            },
+            isometric_space: IsometricSpace {
+                ..Default::default()
             }
         }
     }
@@ -154,6 +160,7 @@ impl eframe::App for DialogueApp {
                     }
                 });
             }
+
             GameState::InGame => {
 
                 let mut style = (*ctx.style()).clone();
@@ -341,10 +348,72 @@ impl eframe::App for DialogueApp {
                         });
 
                 });
+
+                let delta_time = ctx.input().unstable_dt;
+
+                egui::CentralPanel::default().show(ctx, |ui| {
+
+
+                    // Handle tile hovering
+                    let hovered_tile = self.isometric_space.handle_hover(ctx, ui);
+
+                    // Heading for context, optional
+                    ui.heading("Isometric Game View");
+
+                    // Render the isometric grid
+                    self.isometric_space.draw_isometric_grid(ui);
+
+                    // Handle tile hovering
+                    self.isometric_space.draw_hovered_tile(ui, hovered_tile);
+
+                    // Animate the player’s movement
+                    self.isometric_space.animate_player(delta_time);
+
+                    // Render the player on the grid
+                    self.isometric_space.draw_player(ui);
+
+                    // // Handle mouse movement to update player position
+                    // self.isometric_space.handle_mouse_movement(ctx);
+
+                    // Handle mouse movement to start the player's movement
+                    if ctx.input().pointer.any_click() {
+                        if let Some(hovered) = hovered_tile {
+                            self.isometric_space.start_player_move(hovered);  // Move to hovered tile
+                        }
+                    }
+
+                    // Display other in-game information
+                    ui.separator();
+                    ui.label(format!(
+                        "Current Time: Day {}, {}:{:02}",
+                        self.current_time.day, self.current_time.hour, self.current_time.minute
+                    ));
+
+                    ui.label(format!(
+                        "Player Position: ({}, {})",
+                        self.isometric_space.player_position.0,
+                        self.isometric_space.player_position.1
+                    ));
+
+                    
+                });
+
+                if self.isometric_space.player_target_position.is_some() { // animation_in_progress 
+                    ctx.request_repaint();
+                }
             }
-            
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
 
             GameState::InventoryView => {
                 // Display the player's inventory
